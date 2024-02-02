@@ -3,7 +3,7 @@ resource "juju_model" "sdcore" {
 }
 
 module "sdcore-amf-k8s" {
-  source                 = "git::https://github.com/canonical/sdcore-amf-k8s-operator//terraform"
+  source                 = "./modules/sdcore-amf-k8s"
   model_name             = juju_model.sdcore.name
   nrf_application_name   = module.sdcore-nrf-k8s.nrf_application_name
   certs_application_name = module.self-signed-certificates.certs_application_name
@@ -13,7 +13,7 @@ module "sdcore-amf-k8s" {
 }
 
 module "sdcore-ausf-k8s" {
-  source                 = "git::https://github.com/canonical/sdcore-ausf-k8s-operator//terraform"
+  source                 = "./modules/sdcore-ausf-k8s"
   model_name             = juju_model.sdcore.name
   nrf_application_name   = module.sdcore-nrf-k8s.nrf_application_name
   certs_application_name = module.self-signed-certificates.certs_application_name
@@ -21,7 +21,7 @@ module "sdcore-ausf-k8s" {
 }
 
 module "sdcore-nms-k8s" {
-  source                   = "git::https://github.com/canonical/sdcore-nms-k8s-operator//terraform"
+  source                   = "./modules/sdcore-nms-k8s"
   model_name               = juju_model.sdcore.name
   webui_application_name   = module.sdcore-webui-k8s.webui_application_name
   traefik_application_name = module.traefik-k8s.traefik_application_name
@@ -29,7 +29,7 @@ module "sdcore-nms-k8s" {
 }
 
 module "sdcore-nrf-k8s" {
-  source                 = "git::https://github.com/canonical/sdcore-nrf-k8s-operator//terraform"
+  source                 = "./modules/sdcore-nrf-k8s"
   model_name             = juju_model.sdcore.name
   certs_application_name = module.self-signed-certificates.certs_application_name
   db_application_name    = module.mongodb-k8s.db_application_name
@@ -37,7 +37,7 @@ module "sdcore-nrf-k8s" {
 }
 
 module "sdcore-nssf-k8s" {
-  source                 = "git::https://github.com/canonical/sdcore-nssf-k8s-operator//terraform"
+  source                 = "./modules/sdcore-nssf-k8s"
   model_name             = juju_model.sdcore.name
   nrf_application_name   = module.sdcore-nrf-k8s.nrf_application_name
   certs_application_name = module.self-signed-certificates.certs_application_name
@@ -46,7 +46,7 @@ module "sdcore-nssf-k8s" {
 }
 
 module "sdcore-pcf-k8s" {
-  source                 = "git::https://github.com/canonical/sdcore-pcf-k8s-operator//terraform"
+  source                 = "./modules/sdcore-pcf-k8s"
   model_name             = juju_model.sdcore.name
   nrf_application_name   = module.sdcore-nrf-k8s.nrf_application_name
   certs_application_name = module.self-signed-certificates.certs_application_name
@@ -55,7 +55,7 @@ module "sdcore-pcf-k8s" {
 }
 
 module "sdcore-smf-k8s" {
-  source                 = "git::https://github.com/canonical/sdcore-smf-k8s-operator//terraform"
+  source                 = "./modules/sdcore-smf-k8s"
   model_name             = juju_model.sdcore.name
   nrf_application_name   = module.sdcore-nrf-k8s.nrf_application_name
   certs_application_name = module.self-signed-certificates.certs_application_name
@@ -64,7 +64,7 @@ module "sdcore-smf-k8s" {
 }
 
 module "sdcore-udm-k8s" {
-  source                 = "git::https://github.com/canonical/sdcore-udm-k8s-operator//terraform"
+  source                 = "./modules/sdcore-udm-k8s"
   model_name             = juju_model.sdcore.name
   nrf_application_name   = module.sdcore-nrf-k8s.nrf_application_name
   certs_application_name = module.self-signed-certificates.certs_application_name
@@ -72,7 +72,7 @@ module "sdcore-udm-k8s" {
 }
 
 module "sdcore-udr-k8s" {
-  source                 = "git::https://github.com/canonical/sdcore-udr-k8s-operator//terraform"
+  source                 = "./modules/sdcore-udr-k8s"
   model_name             = juju_model.sdcore.name
   nrf_application_name   = module.sdcore-nrf-k8s.nrf_application_name
   certs_application_name = module.self-signed-certificates.certs_application_name
@@ -81,21 +81,21 @@ module "sdcore-udr-k8s" {
 }
 
 module "sdcore-webui-k8s" {
-  source              = "git::https://github.com/canonical/sdcore-webui-k8s-operator//terraform"
+  source              = "./modules/sdcore-webui-k8s"
   model_name          = juju_model.sdcore.name
   db_application_name = module.mongodb-k8s.db_application_name
   channel             = var.channel
 }
 
 module "mongodb-k8s" {
-  source       = "git::https://github.com/canonical/mongodb-operator.git//terraform"
+  source       = "./modules/mongodb-k8s"
   model_name   = juju_model.sdcore.name
   channel      = var.mongo-channel
   mongo-config = var.mongo-config
 }
 
 module "grafana-agent-k8s" {
-  source                         = "git::https://github.com/canonical/grafana-agent-k8s-operator//terraform"
+  source                         = "./modules/grafana-agent-k8s"
   model_name                     = juju_model.sdcore.name
   channel                        = var.grafana-channel
   metrics_remote_write_offer_url = var.metrics_remote_write_offer_url
@@ -104,14 +104,14 @@ module "grafana-agent-k8s" {
 }
 
 module "self-signed-certificates" {
-  source      = "git::https://github.com/canonical/self-signed-certificates-operator.git//terraform"
+  source      = "./modules/self-signed-certificates"
   model_name  = juju_model.sdcore.name
   channel     = var.cert-channel
   cert-config = var.cert-config
 }
 
 module "traefik-k8s" {
-  source         = "git::https://github.com/canonical/traefik-k8s-operator//terraform"
+  source         = "./modules/traefik-k8s"
   model_name     = juju_model.sdcore.name
   channel        = var.traefik-channel
   traefik-config = var.traefik-config
