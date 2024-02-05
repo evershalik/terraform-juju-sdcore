@@ -1,17 +1,15 @@
 # Contributing
 
-## Development environment
+## Prerequisites
 
-### Prerequisites
+To make contributions to this repository, the following software and tools needs to be installed in your development environment.
 
-Make sure the following software and tools are installed in the development
-environment.
+- A Kubernetes cluster
+- Juju 3.x
+- Juju controller bootstrapped onto the K8s cluster
+- Terraform
 
-- `microk8s`
-- `juju`
-- `terraform`
-
-### Prepare Development Environment
+## Prepare Development Environment
 
 Install Microk8s:
 
@@ -45,7 +43,13 @@ Bootstrap the Juju Controller using Microk8s:
 juju bootstrap microk8s
 ```
 
-### Terraform provider
+Add a Juju model:
+
+```console
+juju add-model <model-name>
+````
+
+## Development and Testing
 
 The Terraform module uses the Juju provider to provision Juju resources. Please refer to the [Juju provider documentation](https://registry.terraform.io/providers/juju/juju/latest/docs) for more information.
 
@@ -57,11 +61,7 @@ Initialise the provider:
 terraform init
 ```
 
-## Testing
-
-Terraform CLI provides various ways to do formatting and validation.
-
-Formats to a canonical format and style:
+Formats the *.tf files to a canonical format and style:
 
 ```console
 terraform fmt

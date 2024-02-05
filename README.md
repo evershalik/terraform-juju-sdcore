@@ -1,65 +1,33 @@
-# SD-Core Control Plane Terraform Module
+# SD-Core Terraform Module
 
-This SD-Core Control Plane Terraform module aims to deploy the [sdcore-control-plane-k8s bundle](https://charmhub.io/sdcore-control-plane-k8s) via Terraform.
+This folder contains the [Terraform][Terraform] module for the [sdcore-k8s][sdcore-k8s].
 
-## Getting Started
+The module uses the [Terraform Juju provider][Terraform Juju provider] to model the charm deployment onto any Kubernetes environment managed by [Juju][Juju].
 
-### Prerequisites
+## Module structure
 
-The following software and tools needs to be installed and should be running in the local environment.
+- **main.tf** - Defines the Juju application to be deployed.
+- **variables.tf** - Allows customization of the deployment. Except for exposing the deployment options (Juju model name, channel) also allows overwriting charm's default configuration.
+- **terraform.tf** - Defines the Terraform provider.
 
-- `microk8s`
-- `juju 3.x`
-- `terrafom`
+## Deploying sdcore-k8s module
 
-### Deploy the sdcore-control-plane-k8s bundle using Terraform
+### Pre-requisites
 
-Make sure that `storage`, `multus` and `metallb` plugins are enabled for Microk8s:
+The following tools needs to be installed and should be running in the environment. Please [set up your environment][set-up-environment] before deployment.
 
-```console
-sudo microk8s enable hostpath-storage multus
-sudo microk8s enable metallb:10.0.0.2-10.0.0.4
-```
+- A Kubernetes host with a CPU supporting AVX2 and RDRAND instructions (Intel Haswell, AMD Excavator or equivalent)
+- A Kubernetes cluster with the `Multus` and `Metallb` addon enabled.
+- Juju 3.x
+- Juju controller bootstrapped onto the K8s cluster
+- Terraform
 
-Initialise the provider:
+### Deploying sdcore-k8s with Terraform
 
-```console
-terraform init
-```
+### TODO
 
-Customize the configuration inputs under `terraform.tfvars` file according to requirement.
-
-Replace the values in the `terraform.tfvars` file. The provided model-name is not expected to pre-exist and will be created by Juju Terraform Provider.
-
-```yaml
-# Mandatory Config Options
-model_name             = "put your model-name here"
-```
-
-Run Terraform Plan by providing var-file:
-
-```console
-terraform plan -var-file="terraform.tfvars" 
-```
-
-Deploy the resources, skip the approval:
-
-```console
-terraform apply -auto-approve 
-```
-
-### Check the Output
-
-Run `juju switch <juju model>` to switch to the target Juju model and observe the status of the applications.
-
-```console
-juju status --relations
-```
-
-### Clean up
-
-Remove the applications:
-
-```console
-terraform destroy -auto-approve
-```
+[Terraform]: https://www.terraform.io/
+[Terraform Juju provider]: https://registry.terraform.io/providers/juju/juju/latest
+[Juju]: https://juju.is
+[sdcore-k8s]: https://charmhub.io/sdcore-k8s
+[set-up-environment]: [https://discourse.charmhub.io/t/set-up-your-development-environment-with-microk8s-for-juju-terraform-provider/13109#prepare-development-environment-2
