@@ -1,6 +1,6 @@
 # SD-Core Control Plane Terraform Module
 
-This folder contains the [Terraform][Terraform] module for the [sdcore-control-plane-k8s][sdcore-control-plane-k8s].
+This folder contains the [Terraform][Terraform] module for the [sdcore-control-plane-k8s][sdcore-control-plane-k8s] bundle.
 
 The module uses the [Terraform Juju provider][Terraform Juju provider] to model the charm deployment onto any Kubernetes environment managed by [Juju][Juju].
 
@@ -16,44 +16,64 @@ The module can be used to deploy the `sdcore-control-plane-k8s` separately as we
 
 ### Pre-requisites
 
-The following tools needs to be installed and should be running in the environment. Please [set up your environment][set-up-environment] before deployment.
+The following tools needs to be installed and should be running in the environment. 
 
 - A Kubernetes cluster with the `Multus` and `Metallb` addon enabled.
 - Juju 3.x
 - Juju controller bootstrapped onto the K8s cluster
 - Terraform
 
+### Preparing deployment environment
+
+Install MicroK8s and add your user to the snap_microk8s group:
+
+```shell
+sudo snap install microk8s --channel=1.27-strict/stable
+sudo usermod -a -G snap_microk8s $USER
+newgrp snap_microk8s
+```
+
+Add the community repository for Multus MicroK8s addon:
+
+```shell
+sudo microk8s addons repo add community https://github.com/canonical/microk8s-community-addons --reference feat/strict-fix-multus
+```
+
+Enable the `hostpath-storage`, `multus` and `metallb` MicroK8s addons.
+```shell
+sudo microk8s enable hostpath-storage
+sudo microk8s enable multus
+sudo microk8s enable metallb:10.0.0.2-10.0.0.3
+```
+
+Install Juju:
+
+```shell
+sudo snap install juju --channel=3.1/stable
+```
+
+Bootstrap a Juju controller:
+
+```shell
+juju bootstrap microk8s
+```
+
 ### Deploying sdcore-control-plane-k8s with Terraform
 
-Form inside the `sdcore-control-plane-k8s` module folder, initialize the provider:
+Initialize the provider:
 
 ```console
 terraform init
 ```
 
-While creating the plan, the default configuration can be overwritten with `-var-file`. To do that, create a `terraform.tfvars` including the contents similar to below:
+Create the `terraform.tfvars` file to specify the name of the Juju model to deploy to. Reusing already existing model is not recommended.
 
 ```yaml
 # Mandatory Config Options
 model_name = "put your model-name here"
 
-# Optional Configurations
-
-# channel                        = "put the channel for the SD-Core charms here"
-# mongo_channel                  = "put the MongoDB charm channel here"
-# grafana_channel                = "put the Grafana charm channel here"
-# self_signed_certificates_channel                   = "put the Self Signed Certificates charm channel here"
-# traefik_channel                = "put the Self Signed Certificates charm channel here"
-
-# amf_config                     = {} // Put the Additional Config for the AMF charm
-# nssf_config                    = {} // Put the Additional Config for the NSSF charm
-# mongo_config                   = {} // Put the Additional Config for the MongoDB charm
-# grafana_config                 = {} // Put the Additional Config for the Grafana charm
-# self_signed_certificates_config                    = {} // Put the Additional Config for the Self Signed Certificates charm
-# traefik_config                 = {} // Put the Additional Config for the Traefik charm
+# Customize the configuration variables here if needed
 ```
-
-Fill the mandatory config options in the `terraform.tfvars` file.  The provided Juju `model_name` is not expected to pre-exist and will be created by Juju Terraform Provider.
 
 Create the Terraform Plan:
 
@@ -100,4 +120,3 @@ module "sdcore-control-plane" {
 [Terraform Juju provider]: https://registry.terraform.io/providers/juju/juju/latest
 [Juju]: https://juju.is
 [sdcore-control-plane-k8s]: https://charmhub.io/sdcore-control-plane-k8s
-[set-up-environment]: [https://discourse.charmhub.io/t/set-up-your-development-environment-with-microk8s-for-juju-terraform-provider/13109#prepare-development-environment-2]

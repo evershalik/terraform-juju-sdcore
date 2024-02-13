@@ -1,8 +1,10 @@
-# SD-Core Terraform Module
+# SD-Core Control Plane Terraform Module
 
-This folder contains the [Terraform][Terraform] module for [sdcore-k8s][sdcore-k8s] consisting of [sdcore-control-plane-k8s][sdcore-control-plane-k8s] and [sdcore-user-plane-k8s][sdcore-user-plane-k8s] modules.
+This folder contains the [Terraform][Terraform] module for the [sdcore-user-plane-k8s][sdcore-user-plane-k8s] bundle.
 
-The modules use the [Terraform Juju provider][Terraform Juju provider] to model the charm deployment onto any Kubernetes environment managed by [Juju][Juju].
+The module uses the [Terraform Juju provider][Terraform Juju provider] to model the charm deployment onto any Kubernetes environment managed by [Juju][Juju].
+
+The module can be used to deploy the `sdcore-user-plane-k8s` separately as well as a part of `sdcore-k8s` module, depending on the deployment architecture.
 
 ## Module structure
 
@@ -10,11 +12,11 @@ The modules use the [Terraform Juju provider][Terraform Juju provider] to model 
 - **variables.tf** - Allows customization of the deployment. Except for exposing the deployment options (Juju model name, channel) also allows overwriting charm's default configuration.
 - **terraform.tf** - Defines the Terraform provider.
 
-## Deploying sdcore-k8s module
+## Deploying sdcore-user-plane-k8s module separately
 
 ### Pre-requisites
 
-The following tools needs to be installed and should be running in the environment.
+The following tools needs to be installed and should be running in the environment. 
 
 - A Kubernetes host with a CPU supporting AVX2 and RDRAND instructions (Intel Haswell, AMD Excavator or equivalent)
 - A Kubernetes cluster with the `Multus` and `Metallb` addon enabled.
@@ -42,7 +44,7 @@ Enable the `hostpath-storage`, `multus` and `metallb` MicroK8s addons.
 ```shell
 sudo microk8s enable hostpath-storage
 sudo microk8s enable multus
-sudo microk8s enable metallb:10.0.0.2-10.0.0.4
+sudo microk8s enable metallb:10.0.0.2-10.0.0.2
 ```
 
 Install Juju:
@@ -57,7 +59,7 @@ Bootstrap a Juju controller:
 juju bootstrap microk8s
 ```
 
-### Deploying sdcore-k8s with Terraform
+### Deploying sdcore-user-plane-k8s with Terraform
 
 Initialize the provider:
 
@@ -102,9 +104,20 @@ Destroy the deployment:
 terraform destroy -auto-approve
 ```
 
+## Using sdcore-user-plane-k8s module in higher level modules
+
+If you want to use `sdcore-user-plane-k8s` module as part of your Terraform module, import it like shown below:
+
+```text
+module "sdcore-user-plane" {
+  source = "git::https://github.com/canonical/https://github.com/canonical/terraform-juju-sdcore-k8s//modules/sdcore-user-plane-k8s"
+  
+  model_name = "juju_model_name"
+  (Customize configuration variables here if needed)
+}
+```
+
 [Terraform]: https://www.terraform.io/
 [Terraform Juju provider]: https://registry.terraform.io/providers/juju/juju/latest
 [Juju]: https://juju.is
-[sdcore-k8s]: https://charmhub.io/sdcore-k8s
-[sdcore-control-plane-k8s]: https://charmhub.io/sdcore-control-plane-k8s
 [sdcore-user-plane-k8s]: https://charmhub.io/sdcore-user-plane-k8s
