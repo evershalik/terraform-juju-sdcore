@@ -9,14 +9,14 @@ module "upf" {
   source     = "git::https://github.com/canonical/sdcore-upf-k8s-operator//terraform"
   model_name = juju_model.sdcore.name
   channel    = var.channel
-  amf-config = var.upf_config
+  config     = var.upf_config
 }
 
 module "grafana-agent" {
-  source         = "./modules/grafana-agent-k8s"
-  model_name     = juju_model.sdcore.name
-  channel        = var.grafana_agent_channel
-  grafana-config = var.grafana_agent_config
+  source     = "../grafana-agent-k8s"
+  model_name = juju_model.sdcore.name
+  channel    = var.grafana_agent_channel
+  config     = var.grafana_agent_config
 }
 
 # Integrations for `metrics` endpoint

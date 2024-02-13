@@ -9,8 +9,8 @@ The base module is not intended to be deployed in separation (it is possible tho
 ## Module structure
 
 - **main.tf** - Defines the Juju application to be deployed.
-- **variables.tf** - Allows customization of the deployment. Except for exposing the deployment options (Juju model name, channel or application name) also models the charm configuration.
-- **output.tf** - Responsible for integrating the module with other Terraform modules, primarily by defining potential integration endpoints (charm integrations), but also by exposing the application name.
+- **variables.tf** - Allows customization of the deployment such as Juju model name, application name, charm's channel and configuration.
+- **output.tf** - Responsible for integrating the module with other Terraform modules, primarily by defining potential integration endpoints (charm integrations) together with exposing the application name.
 - **terraform.tf** - Defines the Terraform provider.
 
 ## Pre-requisites
@@ -60,4 +60,3 @@ The complete list of available integrations can be found [here][grafana-agent-in
 [Juju]: https://juju.is
 [grafana-agent-integrations]: https://charmhub.io/grafana-agent-k8s/integrations
 [set-up-environment]: [https://discourse.charmhub.io/t/set-up-your-development-environment-with-microk8s-for-juju-terraform-provider/13109]
-

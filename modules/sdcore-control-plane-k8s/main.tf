@@ -9,7 +9,7 @@ module "amf" {
   source     = "git::https://github.com/canonical/sdcore-amf-k8s-operator//terraform"
   model_name = juju_model.sdcore.name
   channel    = var.channel
-  amf-config = var.amf_config
+  config     = var.amf_config
 }
 
 module "ausf" {
@@ -31,10 +31,10 @@ module "nrf" {
 }
 
 module "nssf" {
-  source      = "git::https://github.com/canonical/sdcore-nssf-k8s-operator//terraform"
-  model_name  = juju_model.sdcore.name
-  channel     = var.channel
-  nssf-config = var.nssf_config
+  source     = "git::https://github.com/canonical/sdcore-nssf-k8s-operator//terraform"
+  model_name = juju_model.sdcore.name
+  channel    = var.channel
+  config     = var.nssf_config
 }
 
 module "pcf" {
@@ -68,31 +68,31 @@ module "webui" {
 }
 
 module "mongodb" {
-  source       = "./modules/mongodb-k8s"
-  model_name   = juju_model.sdcore.name
-  channel      = var.mongo_channel
-  mongo-config = var.mongo_config
+  source     = "../mongodb-k8s"
+  model_name = juju_model.sdcore.name
+  channel    = var.mongo_channel
+  config     = var.mongo_config
 }
 
 module "grafana-agent" {
-  source         = "./modules/grafana-agent-k8s"
-  model_name     = juju_model.sdcore.name
-  channel        = var.grafana_agent_channel
-  grafana-config = var.grafana_agent_config
+  source     = "../grafana-agent-k8s"
+  model_name = juju_model.sdcore.name
+  channel    = var.grafana_agent_channel
+  config     = var.grafana_agent_config
 }
 
 module "self-signed-certificates" {
-  source      = "git::https://github.com/canonical/self-signed-certificates-operator.git//terraform"
-  model_name  = juju_model.sdcore.name
-  channel     = var.self_signed_certificates_channel
-  cert-config = var.self_signed_certificates_config
+  source     = "git::https://github.com/canonical/self-signed-certificates-operator.git//terraform"
+  model_name = juju_model.sdcore.name
+  channel    = var.self_signed_certificates_channel
+  config     = var.self_signed_certificates_config
 }
 
 module "traefik" {
-  source         = "./modules/traefik-k8s"
-  model_name     = juju_model.sdcore.name
-  channel        = var.traefik_channel
-  traefik-config = var.traefik_config
+  source     = "../traefik-k8s"
+  model_name = juju_model.sdcore.name
+  channel    = var.traefik_channel
+  config     = var.traefik_config
 }
 
 # Integrations for `fiveg-nrf` endpoint

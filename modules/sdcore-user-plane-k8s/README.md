@@ -1,25 +1,27 @@
-# SD-Core Control Plane Terraform Module
+# SD-Core User Plane Terraform Module
 
-This folder contains the [Terraform][Terraform] module for the [sdcore-user-plane-k8s][sdcore-user-plane-k8s] bundle.
+This folder contains the [Terraform][Terraform] module to deploy the [sdcore-user-plane-k8s][sdcore-user-plane-k8s] bundle.
 
 The module uses the [Terraform Juju provider][Terraform Juju provider] to model the charm deployment onto any Kubernetes environment managed by [Juju][Juju].
 
-The module can be used to deploy the `sdcore-user-plane-k8s` separately as well as a part of `sdcore-k8s` module, depending on the deployment architecture.
+The module can be used to deploy the `sdcore-user-plane-k8s` separately as well as a part of the higher level modules, depending on the deployment architecture.
 
 ## Module structure
 
 - **main.tf** - Defines the Juju application to be deployed.
-- **variables.tf** - Allows customization of the deployment. Except for exposing the deployment options (Juju model name, channel) also allows overwriting charm's default configuration.
+- **variables.tf** - Allows customization of the deployment including Juju model name, charm's channel and configuration.
+- **output.tf** - Responsible for integrating the module with other Terraform modules, primarily by defining potential integration endpoints (charm integrations).
 - **terraform.tf** - Defines the Terraform provider.
 
 ## Deploying sdcore-user-plane-k8s module separately
 
 ### Pre-requisites
 
-The following tools needs to be installed and should be running in the environment. 
+The following tools need to be installed and should be running in the environment.
 
 - A Kubernetes host with a CPU supporting AVX2 and RDRAND instructions (Intel Haswell, AMD Excavator or equivalent)
 - A Kubernetes cluster with the `Multus` and `Metallb` addon enabled.
+- The Load balancer (MetalLB) has address range with at least 1 available IP address
 - Juju 3.x
 - Juju controller bootstrapped onto the K8s cluster
 - Terraform
@@ -41,10 +43,11 @@ sudo microk8s addons repo add community https://github.com/canonical/microk8s-co
 ```
 
 Enable the `hostpath-storage`, `multus` and `metallb` MicroK8s addons.
+
 ```shell
 sudo microk8s enable hostpath-storage
 sudo microk8s enable multus
-sudo microk8s enable metallb:10.0.0.2-10.0.0.2
+sudo microk8s enable metallb:10.0.0.2/32
 ```
 
 Install Juju:
@@ -69,11 +72,12 @@ terraform init
 
 Create the `terraform.tfvars` file to specify the name of the Juju model to deploy to. Reusing already existing model is not recommended.
 
-```yaml
-# Mandatory Config Options
+```console
+cat << EOF | tee terraform.tfvars
 model_name = "put your model-name here"
 
 # Customize the configuration variables here if needed
+EOF
 ```
 
 Create the Terraform Plan:
@@ -94,6 +98,24 @@ Run `juju switch <juju model>` to switch to the target Juju model and observe th
 
 ```console
 juju status --relations
+```
+
+This will show an output similar to the following:
+
+```console
+Model  Controller          Cloud/Region        Version  SLA          Timestamp
+<model_name>   microk8s-localhost  microk8s/localhost  3.1.7    unsupported  17:04:33+03:00
+
+App            Version  Status   Scale  Charm              Channel        Rev  Address         Exposed  Message
+grafana-agent  0.32.1   waiting      1  grafana-agent-k8s  latest/stable   51  10.152.183.231  no       installing agent
+upf                     active       1  sdcore-upf-k8s     1.3/edge        31  10.152.183.100  no       
+
+Unit              Workload  Agent  Address      Ports  Message
+grafana-agent/0*  blocked   idle   10.1.146.98         send-remote-write: off, grafana-cloud-config: off
+upf/0*            active    idle   10.1.146.87         
+
+Integration provider  Requirer                        Interface              Type     Message
+grafana-agent:peers   grafana-agent:peers             grafana_agent_replica  peer   
 ```
 
 ### Clean up

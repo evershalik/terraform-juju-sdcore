@@ -14,7 +14,7 @@ variable "channel" {
 }
 
 variable "grafana_agent_channel" {
-  description = "The channel to use when deploying `grafana-agent-k8s` charm "
+  description = "The channel to use when deploying `grafana-agent-k8s` charm."
   type        = string
   default     = "latest/stable"
 }

@@ -5,7 +5,7 @@ variable "model_name" {
 }
 
 variable "app_name" {
-  description = "Name of the application in the Juju model"
+  description = "Name of the application in the Juju model."
   type        = string
   default     = "traefik"
 }

@@ -2,52 +2,12 @@
 
 ## Prerequisites
 
-To make contributions to this repository, the following software and tools needs to be installed in your development environment.
+To make contributions to this repository, the following software is needed to be installed in your development environment. Please [set up your environment][set-up-environment] before development.
 
 - A Kubernetes cluster
 - Juju 3.x
 - Juju controller bootstrapped onto the K8s cluster
 - Terraform
-
-## Prepare Development Environment
-
-Install Microk8s:
-
-```console
-sudo snap install microk8s --channel=1.27-strict/stable
-sudo usermod -a -G snap_microk8s $USER
-newgrp snap_microk8s
-```
-
-Enable `storage` plugin for Microk8s:
-
-```console
-sudo microk8s enable hostpath-storage
-```
-
-Install Juju:
-
-```console
-sudo snap install juju --channel=3.1/stable
-```
-
-Install Terraform:
-
-```console
-sudo snap install --classic terraform
-```
-
-Bootstrap the Juju Controller using Microk8s:
-
-```console
-juju bootstrap microk8s
-```
-
-Add a Juju model:
-
-```console
-juju add-model <model-name>
-````
 
 ## Development and Testing
 
@@ -61,13 +21,13 @@ Initialise the provider:
 terraform init
 ```
 
-Formats the *.tf files to a canonical format and style:
+Format the *.tf files to a canonical format and style:
 
 ```console
 terraform fmt
 ```
 
-Check the syntactical validation:
+Check the syntax:
 
 ```console
 terraform validate
@@ -78,3 +38,5 @@ Preview the changes:
 ```console
 terraform plan
 ```
+
+[set-up-environment]: [https://discourse.charmhub.io/t/set-up-your-development-environment-with-microk8s-for-juju-terraform-provider/13109]

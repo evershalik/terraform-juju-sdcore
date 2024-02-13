@@ -1,10 +1,10 @@
-# SD-Core Control Plane Terraform Module
+# SD-Core Terraform Module
 
-This folder contains the [Terraform][Terraform] module to deploy the [sdcore-control-plane-k8s][sdcore-control-plane-k8s] bundle.
+This folder contains the [Terraform][Terraform] module to deploy the [SD-Core][sdcore-k8s] bundle.
 
-The module uses the [Terraform Juju provider][Terraform Juju provider] to model the charm deployment onto any Kubernetes environment managed by [Juju][Juju].
+The modules use the [Terraform Juju provider][Terraform Juju provider] to model the bundle deployment onto any Kubernetes environment managed by [Juju][Juju].
 
-The module can be used to deploy the `sdcore-control-plane-k8s` separately as well as a part of the higher level modules depending on the deployment architecture.
+This module is used to deploys a standalone 5G core network including 5G control plane functions, the UPF, Webui, Grafana Agent, Traefik, Self Signed Certificates and MongoDB.
 
 ## Module structure
 
@@ -13,14 +13,15 @@ The module can be used to deploy the `sdcore-control-plane-k8s` separately as we
 - **output.tf** - Responsible for integrating the module with other Terraform modules, primarily by defining potential integration endpoints (charm integrations).
 - **terraform.tf** - Defines the Terraform provider.
 
-## Deploying sdcore-control-plane-k8s module separately
+## Deploying sdcore-k8s module
 
 ### Pre-requisites
 
 The following tools need to be installed and should be running in the environment.
 
-- A Kubernetes cluster with the `Multus` and `Metallb` addon enabled
-- The Load balancer (MetalLB) has address range with at least 2 available IP addresses
+- A Kubernetes host with a CPU supporting AVX2 and RDRAND instructions (Intel Haswell, AMD Excavator or equivalent)
+- A Kubernetes cluster with the `Multus` and `Metallb` addon enabled.
+- The Load balancer (MetalLB) has address range with at least 3 available IP addresses
 - Juju 3.x
 - Juju controller bootstrapped onto the K8s cluster
 - Terraform
@@ -46,7 +47,7 @@ Enable the `hostpath-storage`, `multus` and `metallb` MicroK8s addons.
 ```shell
 sudo microk8s enable hostpath-storage
 sudo microk8s enable multus
-sudo microk8s enable metallb:10.0.0.2-10.0.0.3
+sudo microk8s enable metallb:10.0.0.2-10.0.0.4
 ```
 
 Install Juju:
@@ -61,7 +62,7 @@ Bootstrap a Juju controller:
 juju bootstrap microk8s
 ```
 
-### Deploying sdcore-control-plane-k8s with Terraform
+### Deploying sdcore-k8s with Terraform
 
 Initialize the provider:
 
@@ -102,40 +103,42 @@ juju status --relations
 This will show an output similar to the following:
 
 ```console
-Model     Controller          Cloud/Region        Version  SLA          Timestamp
-<model_name>  microk8s-localhost  microk8s/localhost  3.1.7    unsupported  17:03:06+03:00
+Model       Controller          Cloud/Region        Version  SLA          Timestamp
+<model_name>  microk8s-localhost  microk8s/localhost  3.1.7    unsupported  16:57:40+03:00
 
 App                       Version  Status   Scale  Charm                     Channel        Rev  Address         Exposed  Message
-amf                                active       1  sdcore-amf-k8s            1.3/edge        29  10.152.183.161  no       
-ausf                               active       1  sdcore-ausf-k8s           1.3/edge        24  10.152.183.55   no       
-grafana-agent             0.32.1   waiting      1  grafana-agent-k8s         latest/stable   51  10.152.183.124  no       installing agent
-mongodb                            active       1  mongodb-k8s               6/beta          38  10.152.183.204  no       Primary
-nms                                active       1  sdcore-nms-k8s            1.3/edge        23  10.152.183.238  no       
-nrf                                active       1  sdcore-nrf-k8s            1.3/edge        30  10.152.183.78   no       
-nssf                               active       1  sdcore-nssf-k8s           1.3/edge        24  10.152.183.215  no       
-pcf                                active       1  sdcore-pcf-k8s            1.3/edge        26  10.152.183.225  no       
-self-signed-certificates           active       1  self-signed-certificates  beta            72  10.152.183.146  no       
-smf                                active       1  sdcore-smf-k8s            1.3/edge        25  10.152.183.29   no       
-traefik                   2.10.4   active       1  traefik-k8s               latest/stable  166  10.0.0.10       no       
-udm                                active       1  sdcore-udm-k8s            1.3/edge        23  10.152.183.251  no       
-udr                                active       1  sdcore-udr-k8s            1.3/edge        23  10.152.183.26   no       
-webui                              active       1  sdcore-webui-k8s          1.3/edge        15  10.152.183.33   no       
+amf                                active       1  sdcore-amf-k8s            1.3/edge        29  10.152.183.243  no       
+ausf                               active       1  sdcore-ausf-k8s           1.3/edge        24  10.152.183.126  no       
+grafana-agent             0.32.1   waiting      1  grafana-agent-k8s         latest/stable   51  10.152.183.232  no       installing agent
+mongodb                            active       1  mongodb-k8s               6/beta          38  10.152.183.205  no       Primary
+nms                                active       1  sdcore-nms-k8s            1.3/edge        23  10.152.183.87   no       
+nrf                                active       1  sdcore-nrf-k8s            1.3/edge        30  10.152.183.27   no       
+nssf                               active       1  sdcore-nssf-k8s           1.3/edge        24  10.152.183.210  no       
+pcf                                active       1  sdcore-pcf-k8s            1.3/edge        26  10.152.183.64   no       
+self-signed-certificates           active       1  self-signed-certificates  beta            72  10.152.183.104  no       
+smf                                active       1  sdcore-smf-k8s            1.3/edge        25  10.152.183.134  no       
+traefik                   2.10.4   active       1  traefik-k8s               latest/stable  166  10.0.0.14       no       
+udm                                active       1  sdcore-udm-k8s            1.3/edge        23  10.152.183.165  no       
+udr                                active       1  sdcore-udr-k8s            1.3/edge        23  10.152.183.166  no       
+upf                                active       1  sdcore-upf-k8s            1.3/edge        31  10.152.183.91   no       
+webui                              active       1  sdcore-webui-k8s          1.3/edge        15  10.152.183.208  no       
 
 Unit                         Workload  Agent  Address       Ports  Message
-amf/0*                       active    idle   10.1.146.71          
-ausf/0*                      active    idle   10.1.146.84          
-grafana-agent/0*             blocked   idle   10.1.146.73          logging-consumer: off, grafana-cloud-config: off
-mongodb/0*                   active    idle   10.1.146.114         Primary
-nms/0*                       active    idle   10.1.146.89          
-nrf/0*                       active    idle   10.1.146.125         
-nssf/0*                      active    idle   10.1.146.113         
-pcf/0*                       active    idle   10.1.146.126         
-self-signed-certificates/0*  active    idle   10.1.146.106         
-smf/0*                       active    idle   10.1.146.76          
-traefik/0*                   active    idle   10.1.146.109         
-udm/0*                       active    idle   10.1.146.79          
-udr/0*                       active    idle   10.1.146.124         
-webui/0*                     active    idle   10.1.146.69          
+amf/0*                       active    idle   10.1.146.108         
+ausf/0*                      active    idle   10.1.146.112         
+grafana-agent/0*             blocked   idle   10.1.146.122         logging-consumer: off, grafana-cloud-config: off
+mongodb/0*                   active    idle   10.1.146.107         Primary
+nms/0*                       active    idle   10.1.146.82          
+nrf/0*                       active    idle   10.1.146.127         
+nssf/0*                      active    idle   10.1.146.78          
+pcf/0*                       active    idle   10.1.146.95          
+self-signed-certificates/0*  active    idle   10.1.146.120         
+smf/0*                       active    idle   10.1.146.111         
+traefik/0*                   active    idle   10.1.146.74          
+udm/0*                       active    idle   10.1.146.81          
+udr/0*                       active    idle   10.1.146.105         
+upf/0*                       active    idle   10.1.146.103         
+webui/0*                     active    idle   10.1.146.65          
 
 Integration provider                   Requirer                        Interface              Type     Message
 amf:metrics-endpoint                   grafana-agent:metrics-endpoint  prometheus_scrape      regular  
@@ -167,7 +170,8 @@ self-signed-certificates:certificates  udr:certificates                tls-certi
 smf:metrics-endpoint                   grafana-agent:metrics-endpoint  prometheus_scrape      regular  
 traefik:ingress                        nms:ingress                     ingress                regular  
 traefik:peers                          traefik:peers                   traefik_peers          peer     
-webui:sdcore-management                nms:sdcore-management           sdcore_management      regular  
+upf:metrics-endpoint                   grafana-agent:metrics-endpoint  prometheus_scrape      regular  
+webui:sdcore-management                nms:sdcore-management           sdcore_management      regular
 ```
 
 ### Clean up
@@ -178,20 +182,7 @@ Destroy the deployment:
 terraform destroy -auto-approve
 ```
 
-## Using sdcore-control-plane-k8s module in higher level modules
-
-If you want to use `sdcore-control-plane-k8s` module as part of your Terraform module, import it like shown below:
-
-```text
-module "sdcore-control-plane" {
-  source = "git::https://github.com/canonical/https://github.com/canonical/terraform-juju-sdcore-k8s//modules/sdcore-control-plane-k8s"
-  
-  model_name = "juju_model_name"
-  (Customize configuration variables here if needed)
-}
-```
-
 [Terraform]: https://www.terraform.io/
 [Terraform Juju provider]: https://registry.terraform.io/providers/juju/juju/latest
 [Juju]: https://juju.is
-[sdcore-control-plane-k8s]: https://charmhub.io/sdcore-control-plane-k8s
+[sdcore-k8s]: https://charmhub.io/sdcore-k8s
