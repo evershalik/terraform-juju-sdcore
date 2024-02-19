@@ -3,7 +3,7 @@
 
 resource "juju_model" "sdcore" {
   count = var.create_model == true ? 1 : 0
-  name = var.model_name
+  name  = var.model_name
 }
 
 module "upf" {
