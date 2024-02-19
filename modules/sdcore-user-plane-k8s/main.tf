@@ -2,19 +2,20 @@
 # See LICENSE file for licensing details.
 
 resource "juju_model" "sdcore" {
-  name = var.model_name
+  count = var.create_model == true ? 1 : 0
+  name  = var.model_name
 }
 
 module "upf" {
   source     = "git::https://github.com/canonical/sdcore-upf-k8s-operator//terraform"
-  model_name = juju_model.sdcore.name
+  model_name = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
   channel    = var.channel
   config     = var.upf_config
 }
 
 module "grafana-agent" {
   source     = "../grafana-agent-k8s"
-  model_name = juju_model.sdcore.name
+  model_name = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
   channel    = var.grafana_agent_channel
   config     = var.grafana_agent_config
 }
@@ -22,7 +23,7 @@ module "grafana-agent" {
 # Integrations for `metrics` endpoint
 
 resource "juju_integration" "upf-metrics" {
-  model = var.model_name
+  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
 
   application {
     name     = module.upf.app_name
