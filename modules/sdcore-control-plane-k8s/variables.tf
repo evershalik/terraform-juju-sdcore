@@ -7,6 +7,12 @@ variable "model_name" {
   default     = ""
 }
 
+variable "create_model" {
+  description = "Allows to skip Juju model creation and re-use a model created in a higher level module."
+  type        = bool
+  default     = true
+}
+
 variable "channel" {
   description = "The channel to use when deploying `SD-Core` charms."
   type        = string
