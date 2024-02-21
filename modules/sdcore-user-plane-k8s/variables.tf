@@ -52,7 +52,7 @@ variable "cos_model_name" {
 variable "cos_configuration_config" {
   description = "COS Configuration application config. Details about available options can be found at https://charmhub.io/cos-configuration-k8s/configure."
   type        = map(string)
-  default     = {
+  default = {
     git_repo                = "https://github.com/canonical/sdcore-cos-configuration"
     git_branch              = "main"
     grafana_dashboards_path = "grafana_dashboards/sdcore/"
