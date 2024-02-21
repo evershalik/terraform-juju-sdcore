@@ -508,3 +508,19 @@ resource "juju_integration" "mongodb-logging" {
     endpoint = module.grafana-agent.logging_provider_endpoint
   }
 }
+
+# Integrations for `fiveg-n4` endpoint
+
+resource "juju_integration" "upf-nms" {
+  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+
+  application {
+    name     = module.upf.app_name
+    endpoint = module.upf.fiveg_n4_endpoint
+  }
+
+  application {
+    name     = module.nms.app_name
+    endpoint = module.nms.fiveg_n4_endpoint
+  }
+}
