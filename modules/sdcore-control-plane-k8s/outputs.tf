@@ -16,6 +16,11 @@ output "nms_app_name" {
   value       = module.nms.app_name
 }
 
+output "fiveg_n4_endpoint" {
+  description = "Name of the endpoint to integrate with fiveg_n4 interface."
+  value       = module.nms.fiveg_n4_endpoint
+}
+
 output "fiveg_gnb_identity_endpoint" {
   description = "Name of the endpoint to integrate with fiveg_gnb_identity interface."
   value       = module.nms.fiveg_gnb_identity_endpoint
