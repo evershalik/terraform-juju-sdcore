@@ -4,6 +4,7 @@
 name: Check Terraform Modules
 
 on:
+  push:
   pull_request:
 
 

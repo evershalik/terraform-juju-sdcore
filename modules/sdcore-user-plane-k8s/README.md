@@ -92,7 +92,18 @@ Deploy the resources:
 terraform apply -auto-approve 
 ```
 
-### Check the Output
+#### Including Canonical Observability Stack (COS)
+
+The `sdcore-k8s` Terraform module offers an option to automatically deploy COS. To use it,
+add following variable to your `terraform.tfvars`:
+
+```text
+deploy_cos = true
+```
+
+Please inspect the `variables.tf` file to see all available config options.
+
+### Checking the result
 
 Run `juju switch <juju model>` to switch to the target Juju model and observe the status of the applications.
 
@@ -118,7 +129,7 @@ Integration provider  Requirer                        Interface              Typ
 grafana-agent:peers   grafana-agent:peers             grafana_agent_replica  peer   
 ```
 
-### Clean up
+### Cleaning up
 
 Destroy the deployment:
 

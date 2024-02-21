@@ -1,3 +1,6 @@
+# Copyright 2024 Canonical Ltd.
+# See LICENSE file for licensing details.
+
 variable "model_name" {
   description = "Name of Juju model to deploy application to."
   type        = string
@@ -17,7 +20,7 @@ variable "channel" {
 }
 
 variable "config" {
-  description = "Additional configuration for the Traefik charm. Please see the available options: https://charmhub.io/traefik-k8s/configure."
+  description = "Application config. Details about available options can be found at https://charmhub.io/traefik-k8s/configure."
   type        = map(string)
   default     = {}
 }
