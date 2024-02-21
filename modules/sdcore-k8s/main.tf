@@ -69,14 +69,14 @@ module "webui" {
 }
 
 module "mongodb" {
-  source     = "../mongodb-k8s"
+  source     = "../external/mongodb-k8s"
   model_name = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
   channel    = var.mongo_channel
   config     = var.mongo_config
 }
 
 module "grafana-agent" {
-  source     = "../grafana-agent-k8s"
+  source     = "../external/grafana-agent-k8s"
   model_name = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
   channel    = var.grafana_agent_channel
   config     = var.grafana_agent_config
@@ -90,7 +90,7 @@ module "self-signed-certificates" {
 }
 
 module "traefik" {
-  source     = "../traefik-k8s"
+  source     = "../external/traefik-k8s"
   model_name = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
   channel    = var.traefik_channel
   config     = var.traefik_config
@@ -101,6 +101,14 @@ module "upf" {
   model_name = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
   channel    = var.channel
   config     = var.upf_config
+}
+
+module "cos-lite" {
+  count                    = var.deploy_cos ? 1 : 0
+  source                   = "../external/cos-lite"
+  model_name               = var.cos_model_name
+  deploy_cos_configuration = true
+  cos_configuration_config = var.cos_configuration_config
 }
 
 # Integrations for `fiveg-nrf` endpoint
@@ -522,5 +530,48 @@ resource "juju_integration" "upf-nms" {
   application {
     name     = module.nms.app_name
     endpoint = module.nms.fiveg_n4_endpoint
+  }
+}
+
+# Cross-model integrations
+
+resource "juju_offer" "prometheus-remote-write" {
+  count            = var.deploy_cos ? 1 : 0
+  model            = module.cos-lite[0].model_name
+  application_name = module.cos-lite[0].prometheus_app_name
+  endpoint         = "receive-remote-write"
+}
+resource "juju_offer" "loki-logging" {
+  count            = var.deploy_cos ? 1 : 0
+  model            = module.cos-lite[0].model_name
+  application_name = module.cos-lite[0].loki_app_name
+  endpoint         = "logging"
+}
+
+resource "juju_integration" "prometheus" {
+  count = var.deploy_cos ? 1 : 0
+  model = juju_model.sdcore[0].name
+
+  application {
+    name     = module.grafana-agent.app_name
+    endpoint = module.grafana-agent.send_remote_write_endpoint
+  }
+
+  application {
+    offer_url = juju_offer.prometheus-remote-write[0].url
+  }
+}
+
+resource "juju_integration" "loki" {
+  count = var.deploy_cos ? 1 : 0
+  model = juju_model.sdcore[0].name
+
+  application {
+    name     = module.grafana-agent.app_name
+    endpoint = module.grafana-agent.logging_consumer_endpoint
+  }
+
+  application {
+    offer_url = juju_offer.loki-logging[0].url
   }
 }

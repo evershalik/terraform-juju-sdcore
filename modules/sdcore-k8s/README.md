@@ -4,7 +4,7 @@ This folder contains the [Terraform][Terraform] module to deploy the [SD-Core][s
 
 The modules use the [Terraform Juju provider][Terraform Juju provider] to model the bundle deployment onto any Kubernetes environment managed by [Juju][Juju].
 
-This module is used to deploys a standalone 5G core network including 5G control plane functions, the UPF, Webui, Grafana Agent, Traefik, Self Signed Certificates and MongoDB.
+This module is used to deploy a standalone 5G core network including 5G control plane functions, the UPF, NMS, Grafana Agent, Traefik, Self Signed Certificates and MongoDB.
 
 ## Module structure
 
@@ -28,7 +28,7 @@ The following tools need to be installed and should be running in the environmen
 
 ### Preparing deployment environment
 
-Install MicroK8s and add your user to the snap_microk8s group:
+Install MicroK8s and add your user to the `snap_microk8s` group:
 
 ```shell
 sudo snap install microk8s --channel=1.27-strict/stable
@@ -92,7 +92,18 @@ Deploy the resources:
 terraform apply -auto-approve 
 ```
 
-### Check the Output
+#### Including Canonical Observability Stack (COS)
+
+The `sdcore-k8s` Terraform module offers an option to automatically deploy COS. To use it, 
+add following variable to your `terraform.tfvars`:
+
+```text
+deploy_cos = true
+```
+
+Please inspect the `variables.tf` file to see all available config options.
+
+### Checking the result
 
 Run `juju switch <juju model>` to switch to the target Juju model and observe the status of the applications.
 
@@ -174,7 +185,7 @@ upf:metrics-endpoint                   grafana-agent:metrics-endpoint  prometheu
 webui:sdcore-management                nms:sdcore-management           sdcore_management      regular
 ```
 
-### Clean up
+### Cleaning up
 
 Destroy the deployment:
 

@@ -45,7 +45,7 @@ output "ingress_per_unit_endpoint" {
   value       = "ingress-per-unit"
 }
 
-output "metrics_endpoint_endpoint" {
+output "metrics_endpoint" {
   description = "Name of the endpoint for `prometheus_scrape` interface."
   value       = "metrics-endpoint"
 }

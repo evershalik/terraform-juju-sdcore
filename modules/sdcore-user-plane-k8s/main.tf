@@ -14,10 +14,18 @@ module "upf" {
 }
 
 module "grafana-agent" {
-  source     = "../grafana-agent-k8s"
+  source     = "../external/grafana-agent-k8s"
   model_name = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
   channel    = var.grafana_agent_channel
   config     = var.grafana_agent_config
+}
+
+module "cos-lite" {
+  count                    = var.deploy_cos ? 1 : 0
+  source                   = "../external/cos-lite"
+  model_name               = var.cos_model_name
+  deploy_cos_configuration = true
+  cos_configuration_config = var.cos_configuration_config
 }
 
 # Integrations for `metrics` endpoint
@@ -33,5 +41,48 @@ resource "juju_integration" "upf-metrics" {
   application {
     name     = module.grafana-agent.app_name
     endpoint = module.grafana-agent.metrics_endpoint
+  }
+}
+
+# Cross-model integrations
+
+resource "juju_offer" "prometheus-remote-write" {
+  count            = var.deploy_cos ? 1 : 0
+  model            = module.cos-lite[0].model_name
+  application_name = module.cos-lite[0].prometheus_app_name
+  endpoint         = "receive-remote-write"
+}
+resource "juju_offer" "loki-logging" {
+  count            = var.deploy_cos ? 1 : 0
+  model            = module.cos-lite[0].model_name
+  application_name = module.cos-lite[0].loki_app_name
+  endpoint         = "logging"
+}
+
+resource "juju_integration" "prometheus" {
+  count = var.deploy_cos ? 1 : 0
+  model = juju_model.sdcore[0].name
+
+  application {
+    name     = module.grafana-agent.app_name
+    endpoint = module.grafana-agent.send_remote_write_endpoint
+  }
+
+  application {
+    offer_url = juju_offer.prometheus-remote-write[0].url
+  }
+}
+
+resource "juju_integration" "loki" {
+  count = var.deploy_cos ? 1 : 0
+  model = juju_model.sdcore[0].name
+
+  application {
+    name     = module.grafana-agent.app_name
+    endpoint = module.grafana-agent.logging_consumer_endpoint
+  }
+
+  application {
+    offer_url = juju_offer.loki-logging[0].url
   }
 }
