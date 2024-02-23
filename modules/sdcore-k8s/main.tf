@@ -550,7 +550,7 @@ resource "juju_offer" "loki-logging" {
 
 resource "juju_integration" "prometheus" {
   count = var.deploy_cos ? 1 : 0
-  model = juju_model.sdcore[0].name
+  model = var.model_name
 
   application {
     name     = module.grafana-agent.app_name
@@ -564,7 +564,7 @@ resource "juju_integration" "prometheus" {
 
 resource "juju_integration" "loki" {
   count = var.deploy_cos ? 1 : 0
-  model = juju_model.sdcore[0].name
+  model = var.model_name
 
   application {
     name     = module.grafana-agent.app_name
