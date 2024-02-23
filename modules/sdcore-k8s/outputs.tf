@@ -1,11 +1,6 @@
 # Copyright 2024 Canonical Ltd.
 # See LICENSE file for licensing details.
 
-output "model_name" {
-  description = "Name of the Juju model used for the deployment."
-  value       = juju_model.sdcore.name
-}
-
 output "amf_app_name" {
   description = "Name of the deployed AMF application."
   value       = module.amf.app_name
