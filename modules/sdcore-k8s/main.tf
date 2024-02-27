@@ -227,12 +227,26 @@ resource "juju_integration" "amf-database" {
   }
 }
 
-resource "juju_integration" "udr-database" {
+resource "juju_integration" "udr-auth-database" {
   model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
 
   application {
     name     = module.udr.app_name
-    endpoint = module.udr.database_endpoint
+    endpoint = module.udr.auth_database_endpoint
+  }
+
+  application {
+    name     = module.mongodb.app_name
+    endpoint = module.mongodb.database_endpoint
+  }
+}
+
+resource "juju_integration" "udr-common-database" {
+  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+
+  application {
+    name     = module.udr.app_name
+    endpoint = module.udr.common_database_endpoint
   }
 
   application {
@@ -283,12 +297,26 @@ resource "juju_integration" "nrf-database" {
   }
 }
 
-resource "juju_integration" "webui-database" {
+resource "juju_integration" "webui-auth-database" {
   model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
 
   application {
     name     = module.webui.app_name
-    endpoint = module.webui.database_endpoint
+    endpoint = module.webui.auth_database_endpoint
+  }
+
+  application {
+    name     = module.mongodb.app_name
+    endpoint = module.mongodb.database_endpoint
+  }
+}
+
+resource "juju_integration" "webui-common-database" {
+  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+
+  application {
+    name     = module.webui.app_name
+    endpoint = module.webui.common_database_endpoint
   }
 
   application {
