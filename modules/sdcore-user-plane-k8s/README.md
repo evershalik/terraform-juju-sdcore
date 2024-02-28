@@ -80,16 +80,10 @@ model_name = "put your model-name here"
 EOF
 ```
 
-Create the Terraform Plan:
-
-```console
-terraform plan -var-file="terraform.tfvars" 
-```
-
 Deploy the resources:
 
 ```console
-terraform apply -auto-approve 
+terraform apply -var-file="terraform.tfvars" -auto-approve 
 ```
 
 #### Including Canonical Observability Stack (COS)
