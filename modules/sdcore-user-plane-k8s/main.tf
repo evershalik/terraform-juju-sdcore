@@ -44,6 +44,22 @@ resource "juju_integration" "upf-metrics" {
   }
 }
 
+# Integrations for `logging` endpoint
+
+resource "juju_integration" "upf-logging" {
+  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+
+  application {
+    name     = module.upf.app_name
+    endpoint = module.upf.logging_endpoint
+  }
+
+  application {
+    name     = module.grafana-agent.app_name
+    endpoint = module.grafana-agent.logging_consumer_endpoint
+  }
+}
+
 # Cross-model integrations
 
 resource "juju_offer" "prometheus-remote-write" {

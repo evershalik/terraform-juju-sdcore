@@ -5,7 +5,7 @@
 To make contributions to this repository, the following software is needed to be installed in your development environment. Please [set up your environment][set-up-environment] before development.
 
 - A Kubernetes cluster
-- Juju 3.x
+- Juju>=3.4
 - Juju controller bootstrapped onto the K8s cluster
 - Terraform
 

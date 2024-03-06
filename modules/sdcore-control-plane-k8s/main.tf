@@ -524,6 +524,146 @@ resource "juju_integration" "mongodb-logging" {
   }
 }
 
+resource "juju_integration" "amf-logging" {
+  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+
+  application {
+    name     = module.amf.app_name
+    endpoint = module.amf.logging_endpoint
+  }
+
+  application {
+    name     = module.grafana-agent.app_name
+    endpoint = module.grafana-agent.logging_provider_endpoint
+  }
+}
+
+resource "juju_integration" "ausf-logging" {
+  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+
+  application {
+    name     = module.ausf.app_name
+    endpoint = module.ausf.logging_endpoint
+  }
+
+  application {
+    name     = module.grafana-agent.app_name
+    endpoint = module.grafana-agent.logging_provider_endpoint
+  }
+}
+
+resource "juju_integration" "nrf-logging" {
+  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+
+  application {
+    name     = module.nrf.app_name
+    endpoint = module.nrf.logging_endpoint
+  }
+
+  application {
+    name     = module.grafana-agent.app_name
+    endpoint = module.grafana-agent.logging_provider_endpoint
+  }
+}
+
+resource "juju_integration" "nssf-logging" {
+  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+
+  application {
+    name     = module.nssf.app_name
+    endpoint = module.nssf.logging_endpoint
+  }
+
+  application {
+    name     = module.grafana-agent.app_name
+    endpoint = module.grafana-agent.logging_provider_endpoint
+  }
+}
+
+resource "juju_integration" "pcf-logging" {
+  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+
+  application {
+    name     = module.pcf.app_name
+    endpoint = module.pcf.logging_endpoint
+  }
+
+  application {
+    name     = module.grafana-agent.app_name
+    endpoint = module.grafana-agent.logging_provider_endpoint
+  }
+}
+
+resource "juju_integration" "smf-logging" {
+  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+
+  application {
+    name     = module.smf.app_name
+    endpoint = module.smf.logging_endpoint
+  }
+
+  application {
+    name     = module.grafana-agent.app_name
+    endpoint = module.grafana-agent.logging_provider_endpoint
+  }
+}
+
+resource "juju_integration" "udm-logging" {
+  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+
+  application {
+    name     = module.udm.app_name
+    endpoint = module.udm.logging_endpoint
+  }
+
+  application {
+    name     = module.grafana-agent.app_name
+    endpoint = module.grafana-agent.logging_provider_endpoint
+  }
+}
+
+resource "juju_integration" "udr-logging" {
+  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+
+  application {
+    name     = module.udr.app_name
+    endpoint = module.udr.logging_endpoint
+  }
+
+  application {
+    name     = module.grafana-agent.app_name
+    endpoint = module.grafana-agent.logging_provider_endpoint
+  }
+}
+
+resource "juju_integration" "nms-logging" {
+  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+
+  application {
+    name     = module.nms.app_name
+    endpoint = module.nms.logging_endpoint
+  }
+
+  application {
+    name     = module.grafana-agent.app_name
+    endpoint = module.grafana-agent.logging_provider_endpoint
+  }
+}
+
+resource "juju_integration" "webui-logging" {
+  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+
+  application {
+    name     = module.webui.app_name
+    endpoint = module.webui.logging_endpoint
+  }
+
+  application {
+    name     = module.grafana-agent.app_name
+    endpoint = module.grafana-agent.logging_provider_endpoint
+  }
+}
+
 # Cross-model integrations
 
 resource "juju_offer" "prometheus-remote-write" {

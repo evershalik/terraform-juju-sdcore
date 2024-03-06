@@ -22,7 +22,7 @@ The following tools need to be installed and should be running in the environmen
 - A Kubernetes host with a CPU supporting AVX2 and RDRAND instructions (Intel Haswell, AMD Excavator or equivalent)
 - A Kubernetes cluster with the `Multus` and `Metallb` addon enabled.
 - The Load balancer (MetalLB) has address range with at least 1 available IP address
-- Juju 3.x
+- Juju>=3.4
 - Juju controller bootstrapped onto the K8s cluster
 - Terraform
 
@@ -31,7 +31,7 @@ The following tools need to be installed and should be running in the environmen
 Install MicroK8s and add your user to the snap_microk8s group:
 
 ```shell
-sudo snap install microk8s --channel=1.27-strict/stable
+sudo snap install microk8s --channel=1.29-strict/stable
 sudo usermod -a -G snap_microk8s $USER
 newgrp snap_microk8s
 ```
@@ -53,7 +53,7 @@ sudo microk8s enable metallb:10.0.0.2/32
 Install Juju:
 
 ```shell
-sudo snap install juju --channel=3.1/stable
+sudo snap install juju --channel=3.4/stable
 ```
 
 Bootstrap a Juju controller:
@@ -109,7 +109,7 @@ This will show an output similar to the following:
 
 ```console
 Model  Controller          Cloud/Region        Version  SLA          Timestamp
-<model_name>   microk8s-localhost  microk8s/localhost  3.1.7    unsupported  17:04:33+03:00
+<model_name>   microk8s-localhost  microk8s/localhost  3.4.0    unsupported  17:04:33+03:00
 
 App            Version  Status   Scale  Charm              Channel        Rev  Address         Exposed  Message
 grafana-agent  0.32.1   waiting      1  grafana-agent-k8s  latest/stable   51  10.152.183.231  no       installing agent
