@@ -56,7 +56,7 @@ resource "juju_integration" "upf-logging" {
 
   application {
     name     = module.grafana-agent.app_name
-    endpoint = module.grafana-agent.logging_consumer_endpoint
+    endpoint = module.grafana-agent.logging_provider_endpoint
   }
 }
 
