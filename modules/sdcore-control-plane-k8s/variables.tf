@@ -16,7 +16,7 @@ variable "create_model" {
 variable "channel" {
   description = "The channel to use when deploying `SD-Core` charms."
   type        = string
-  default     = "1.3/edge"
+  default     = "1.4/edge"
 }
 
 variable "mongo_channel" {

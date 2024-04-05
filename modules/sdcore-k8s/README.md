@@ -112,21 +112,21 @@ Model       Controller          Cloud/Region        Version  SLA          Timest
 <model_name>  microk8s-localhost  microk8s/localhost  3.4.0    unsupported  16:57:40+03:00
 
 App                       Version  Status   Scale  Charm                     Channel        Rev  Address         Exposed  Message
-amf                                active       1  sdcore-amf-k8s            1.3/edge        29  10.152.183.243  no       
-ausf                               active       1  sdcore-ausf-k8s           1.3/edge        24  10.152.183.126  no       
+amf                                active       1  sdcore-amf-k8s            1.4/edge        29  10.152.183.243  no       
+ausf                               active       1  sdcore-ausf-k8s           1.4/edge        24  10.152.183.126  no       
 grafana-agent             0.32.1   waiting      1  grafana-agent-k8s         latest/stable   51  10.152.183.232  no       installing agent
 mongodb                            active       1  mongodb-k8s               6/beta          38  10.152.183.205  no       Primary
-nms                                active       1  sdcore-nms-k8s            1.3/edge        23  10.152.183.87   no       
-nrf                                active       1  sdcore-nrf-k8s            1.3/edge        30  10.152.183.27   no       
-nssf                               active       1  sdcore-nssf-k8s           1.3/edge        24  10.152.183.210  no       
-pcf                                active       1  sdcore-pcf-k8s            1.3/edge        26  10.152.183.64   no       
+nms                                active       1  sdcore-nms-k8s            1.4/edge        23  10.152.183.87   no       
+nrf                                active       1  sdcore-nrf-k8s            1.4/edge        30  10.152.183.27   no       
+nssf                               active       1  sdcore-nssf-k8s           1.4/edge        24  10.152.183.210  no       
+pcf                                active       1  sdcore-pcf-k8s            1.4/edge        26  10.152.183.64   no       
 self-signed-certificates           active       1  self-signed-certificates  beta            72  10.152.183.104  no       
-smf                                active       1  sdcore-smf-k8s            1.3/edge        25  10.152.183.134  no       
+smf                                active       1  sdcore-smf-k8s            1.4/edge        25  10.152.183.134  no       
 traefik                   2.10.4   active       1  traefik-k8s               latest/stable  166  10.0.0.14       no       
-udm                                active       1  sdcore-udm-k8s            1.3/edge        23  10.152.183.165  no       
-udr                                active       1  sdcore-udr-k8s            1.3/edge        23  10.152.183.166  no       
-upf                                active       1  sdcore-upf-k8s            1.3/edge        31  10.152.183.91   no       
-webui                              active       1  sdcore-webui-k8s          1.3/edge        15  10.152.183.208  no       
+udm                                active       1  sdcore-udm-k8s            1.4/edge        23  10.152.183.165  no       
+udr                                active       1  sdcore-udr-k8s            1.4/edge        23  10.152.183.166  no       
+upf                                active       1  sdcore-upf-k8s            1.4/edge        31  10.152.183.91   no       
+webui                              active       1  sdcore-webui-k8s          1.4/edge        15  10.152.183.208  no       
 
 Unit                         Workload  Agent  Address       Ports  Message
 amf/0*                       active    idle   10.1.146.108         

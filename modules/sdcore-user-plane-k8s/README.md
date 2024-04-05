@@ -113,7 +113,7 @@ Model  Controller          Cloud/Region        Version  SLA          Timestamp
 
 App            Version  Status   Scale  Charm              Channel        Rev  Address         Exposed  Message
 grafana-agent  0.32.1   waiting      1  grafana-agent-k8s  latest/stable   51  10.152.183.231  no       installing agent
-upf                     active       1  sdcore-upf-k8s     1.3/edge        31  10.152.183.100  no       
+upf                     active       1  sdcore-upf-k8s     1.4/edge        31  10.152.183.100  no       
 
 Unit              Workload  Agent  Address      Ports  Message
 grafana-agent/0*  blocked   idle   10.1.146.98         send-remote-write: off, grafana-cloud-config: off
