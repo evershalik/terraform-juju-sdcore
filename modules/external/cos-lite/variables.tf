@@ -16,7 +16,7 @@ variable "alertmanager_app_name" {
 variable "alertmanager_channel" {
   description = "The channel to use when deploying Alertmanager charm."
   type        = string
-  default     = "stable"
+  default     = "latest/stable"
 }
 variable "alertmanager_config" {
   description = "Application config. Details about available options can be found at https://charmhub.io/alertmanager-k8s/configure."
@@ -33,7 +33,7 @@ variable "catalogue_app_name" {
 variable "catalogue_channel" {
   description = "The channel to use when deploying Catalogue charm."
   type        = string
-  default     = "stable"
+  default     = "latest/stable"
 }
 variable "catalogue_config" {
   description = "Catalogue config. Details about available options can be found at https://charmhub.io/catalogue-k8s/configure."
@@ -55,7 +55,7 @@ variable "cos_configuration_app_name" {
 variable "cos_configuration_channel" {
   description = "The channel to use when deploying cos-configuration-k8s charm."
   type        = string
-  default     = "stable"
+  default     = "latest/stable"
 }
 variable "cos_configuration_config" {
   description = "COS Configuration application config. Details about available options can be found at https://charmhub.io/cos-configuration-k8s/configure."
@@ -72,7 +72,7 @@ variable "grafana_app_name" {
 variable "grafana_channel" {
   description = "The channel to use when deploying Grafana charm."
   type        = string
-  default     = "stable"
+  default     = "latest/stable"
 }
 variable "grafana_config" {
   description = "Grafana config. Details about available options can be found at https://charmhub.io/grafana-k8s/configure."
@@ -89,7 +89,7 @@ variable "loki_app_name" {
 variable "loki_channel" {
   description = "The channel to use when deploying Loki charm."
   type        = string
-  default     = "stable"
+  default     = "latest/stable"
 }
 variable "loki_config" {
   description = "Loki config. Details about available options can be found at https://charmhub.io/loki-k8s/configure."
@@ -106,7 +106,7 @@ variable "prometheus_app_name" {
 variable "prometheus_channel" {
   description = "The channel to use when deploying Prometheus charm."
   type        = string
-  default     = "stable"
+  default     = "latest/stable"
 }
 variable "prometheus_config" {
   description = "Application config. Details about available options can be found at https://charmhub.io/prometheus-k8s/configure."
@@ -123,7 +123,7 @@ variable "traefik_app_name" {
 variable "traefik_channel" {
   description = "The channel to use when deploying Traefik charm."
   type        = string
-  default     = "stable"
+  default     = "latest/stable"
 }
 variable "traefik_config" {
   description = "Traefik config. Details about available options can be found at https://charmhub.io/traefik-k8s/configure."
