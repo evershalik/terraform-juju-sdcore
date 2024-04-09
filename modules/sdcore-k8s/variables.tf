@@ -13,8 +13,62 @@ variable "create_model" {
   default     = true
 }
 
-variable "channel" {
-  description = "The channel to use when deploying `SD-Core` charms."
+variable "amf_channel" {
+  description = "The channel to use when deploying `sdcore-amf-k8s` charm."
+  type        = string
+  default     = "1.4/edge"
+}
+
+variable "ausf_channel" {
+  description = "The channel to use when deploying `sdcore-ausf-k8s` charm."
+  type        = string
+  default     = "1.4/edge"
+}
+
+variable "nms_channel" {
+  description = "The channel to use when deploying `sdcore-nms-k8s` charm."
+  type        = string
+  default     = "1.3/edge"
+}
+
+variable "nrf_channel" {
+  description = "The channel to use when deploying `sdcore-nrf-k8s` charm."
+  type        = string
+  default     = "1.4/edge"
+}
+
+variable "nssf_channel" {
+  description = "The channel to use when deploying `sdcore-nssf-k8s` charm."
+  type        = string
+  default     = "1.4/edge"
+}
+
+variable "pcf_channel" {
+  description = "The channel to use when deploying `sdcore-pcf-k8s` charm."
+  type        = string
+  default     = "1.4/edge"
+}
+
+variable "smf_channel" {
+  description = "The channel to use when deploying `sdcore-smf-k8s` charm."
+  type        = string
+  default     = "1.4/edge"
+}
+
+variable "udm_channel" {
+  description = "The channel to use when deploying `sdcore-udm-k8s` charm."
+  type        = string
+  default     = "1.4/edge"
+}
+
+variable "udr_channel" {
+  description = "The channel to use when deploying `sdcore-udr-k8s` charm."
+  type        = string
+  default     = "1.4/edge"
+}
+
+variable "webui_channel" {
+  description = "The channel to use when deploying `sdcore-webui-k8s` charm."
   type        = string
   default     = "1.4/edge"
 }

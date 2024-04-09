@@ -13,8 +13,8 @@ variable "create_model" {
   default     = true
 }
 
-variable "channel" {
-  description = "The channel to use when deploying `SD-Core` charms."
+variable "upf_channel" {
+  description = "The channel to use when deploying `upf-k8s` charm."
   type        = string
   default     = "1.4/edge"
 }

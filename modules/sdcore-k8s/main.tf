@@ -9,63 +9,63 @@ resource "juju_model" "sdcore" {
 module "amf" {
   source     = "git::https://github.com/canonical/sdcore-amf-k8s-operator//terraform"
   model_name = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
-  channel    = var.channel
+  channel    = var.amf_channel
   config     = var.amf_config
 }
 
 module "ausf" {
   source     = "git::https://github.com/canonical/sdcore-ausf-k8s-operator//terraform"
   model_name = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
-  channel    = var.channel
+  channel    = var.ausf_channel
 }
 
 module "nms" {
   source     = "git::https://github.com/canonical/sdcore-nms-k8s-operator//terraform"
   model_name = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
-  channel    = var.channel
+  channel    = var.nms_channel
 }
 
 module "nrf" {
   source     = "git::https://github.com/canonical/sdcore-nrf-k8s-operator//terraform"
   model_name = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
-  channel    = var.channel
+  channel    = var.nrf_channel
 }
 
 module "nssf" {
   source     = "git::https://github.com/canonical/sdcore-nssf-k8s-operator//terraform"
   model_name = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
-  channel    = var.channel
+  channel    = var.nssf_channel
   config     = var.nssf_config
 }
 
 module "pcf" {
   source     = "git::https://github.com/canonical/sdcore-pcf-k8s-operator//terraform"
   model_name = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
-  channel    = var.channel
+  channel    = var.pcf_channel
 }
 
 module "smf" {
   source     = "git::https://github.com/canonical/sdcore-smf-k8s-operator//terraform"
   model_name = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
-  channel    = var.channel
+  channel    = var.smf_channel
 }
 
 module "udm" {
   source     = "git::https://github.com/canonical/sdcore-udm-k8s-operator//terraform"
   model_name = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
-  channel    = var.channel
+  channel    = var.udm_channel
 }
 
 module "udr" {
   source     = "git::https://github.com/canonical/sdcore-udr-k8s-operator//terraform"
   model_name = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
-  channel    = var.channel
+  channel    = var.udr_channel
 }
 
 module "webui" {
   source     = "git::https://github.com/canonical/sdcore-webui-k8s-operator//terraform"
   model_name = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
-  channel    = var.channel
+  channel    = var.webui_channel
 }
 
 module "mongodb" {
