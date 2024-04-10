@@ -99,7 +99,7 @@ module "traefik" {
 module "upf" {
   source     = "git::https://github.com/canonical/sdcore-upf-k8s-operator//terraform"
   model_name = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
-  channel    = var.channel
+  channel    = var.upf_channel
   config     = var.upf_config
 }
 

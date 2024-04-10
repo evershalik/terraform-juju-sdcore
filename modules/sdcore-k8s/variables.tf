@@ -67,6 +67,12 @@ variable "udr_channel" {
   default     = "1.4/edge"
 }
 
+variable "upf_channel" {
+  description = "The channel to use when deploying `sdcore-upf-k8s` charm."
+  type        = string
+  default     = "1.4/edge"
+}
+
 variable "webui_channel" {
   description = "The channel to use when deploying `sdcore-webui-k8s` charm."
   type        = string
