@@ -28,7 +28,7 @@ variable "ausf_channel" {
 variable "nms_channel" {
   description = "The channel to use when deploying `sdcore-nms-k8s` charm."
   type        = string
-  default     = "1.3/edge"
+  default     = "0.2/edge"
 }
 
 variable "nrf_channel" {

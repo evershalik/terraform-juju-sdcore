@@ -83,12 +83,12 @@ EOF
 Deploy the resources:
 
 ```console
-terraform apply -var-file="terraform.tfvars" -auto-approve 
+terraform apply -var-file="terraform.tfvars" -auto-approve
 ```
 
 #### Including Canonical Observability Stack (COS)
 
-The `sdcore-k8s` Terraform module offers an option to automatically deploy COS. To use it, 
+The `sdcore-k8s` Terraform module offers an option to automatically deploy COS. To use it,
 add following variable to your `terraform.tfvars`:
 
 ```text
@@ -112,70 +112,70 @@ Model       Controller          Cloud/Region        Version  SLA          Timest
 <model_name>  microk8s-localhost  microk8s/localhost  3.4.0    unsupported  16:57:40+03:00
 
 App                       Version  Status   Scale  Charm                     Channel        Rev  Address         Exposed  Message
-amf                                active       1  sdcore-amf-k8s            1.4/edge        29  10.152.183.243  no       
-ausf                               active       1  sdcore-ausf-k8s           1.4/edge        24  10.152.183.126  no       
+amf                                active       1  sdcore-amf-k8s            1.4/edge        29  10.152.183.243  no
+ausf                               active       1  sdcore-ausf-k8s           1.4/edge        24  10.152.183.126  no
 grafana-agent             0.32.1   waiting      1  grafana-agent-k8s         latest/stable   51  10.152.183.232  no       installing agent
 mongodb                            active       1  mongodb-k8s               6/beta          38  10.152.183.205  no       Primary
-nms                                active       1  sdcore-nms-k8s            1.4/edge        23  10.152.183.87   no       
-nrf                                active       1  sdcore-nrf-k8s            1.4/edge        30  10.152.183.27   no       
-nssf                               active       1  sdcore-nssf-k8s           1.4/edge        24  10.152.183.210  no       
-pcf                                active       1  sdcore-pcf-k8s            1.4/edge        26  10.152.183.64   no       
-self-signed-certificates           active       1  self-signed-certificates  beta            72  10.152.183.104  no       
-smf                                active       1  sdcore-smf-k8s            1.4/edge        25  10.152.183.134  no       
-traefik                   2.10.4   active       1  traefik-k8s               latest/stable  166  10.0.0.14       no       
-udm                                active       1  sdcore-udm-k8s            1.4/edge        23  10.152.183.165  no       
-udr                                active       1  sdcore-udr-k8s            1.4/edge        23  10.152.183.166  no       
-upf                                active       1  sdcore-upf-k8s            1.4/edge        31  10.152.183.91   no       
-webui                              active       1  sdcore-webui-k8s          1.4/edge        15  10.152.183.208  no       
+nms                                active       1  sdcore-nms-k8s            0.2/edge        23  10.152.183.87   no
+nrf                                active       1  sdcore-nrf-k8s            1.4/edge        30  10.152.183.27   no
+nssf                               active       1  sdcore-nssf-k8s           1.4/edge        24  10.152.183.210  no
+pcf                                active       1  sdcore-pcf-k8s            1.4/edge        26  10.152.183.64   no
+self-signed-certificates           active       1  self-signed-certificates  beta            72  10.152.183.104  no
+smf                                active       1  sdcore-smf-k8s            1.4/edge        25  10.152.183.134  no
+traefik                   2.10.4   active       1  traefik-k8s               latest/stable  166  10.0.0.14       no
+udm                                active       1  sdcore-udm-k8s            1.4/edge        23  10.152.183.165  no
+udr                                active       1  sdcore-udr-k8s            1.4/edge        23  10.152.183.166  no
+upf                                active       1  sdcore-upf-k8s            1.4/edge        31  10.152.183.91   no
+webui                              active       1  sdcore-webui-k8s          1.4/edge        15  10.152.183.208  no
 
 Unit                         Workload  Agent  Address       Ports  Message
-amf/0*                       active    idle   10.1.146.108         
-ausf/0*                      active    idle   10.1.146.112         
+amf/0*                       active    idle   10.1.146.108
+ausf/0*                      active    idle   10.1.146.112
 grafana-agent/0*             blocked   idle   10.1.146.122         logging-consumer: off, grafana-cloud-config: off
 mongodb/0*                   active    idle   10.1.146.107         Primary
-nms/0*                       active    idle   10.1.146.82          
-nrf/0*                       active    idle   10.1.146.127         
-nssf/0*                      active    idle   10.1.146.78          
-pcf/0*                       active    idle   10.1.146.95          
-self-signed-certificates/0*  active    idle   10.1.146.120         
-smf/0*                       active    idle   10.1.146.111         
-traefik/0*                   active    idle   10.1.146.74          
-udm/0*                       active    idle   10.1.146.81          
-udr/0*                       active    idle   10.1.146.105         
-upf/0*                       active    idle   10.1.146.103         
-webui/0*                     active    idle   10.1.146.65          
+nms/0*                       active    idle   10.1.146.82
+nrf/0*                       active    idle   10.1.146.127
+nssf/0*                      active    idle   10.1.146.78
+pcf/0*                       active    idle   10.1.146.95
+self-signed-certificates/0*  active    idle   10.1.146.120
+smf/0*                       active    idle   10.1.146.111
+traefik/0*                   active    idle   10.1.146.74
+udm/0*                       active    idle   10.1.146.81
+udr/0*                       active    idle   10.1.146.105
+upf/0*                       active    idle   10.1.146.103
+webui/0*                     active    idle   10.1.146.65
 
 Integration provider                   Requirer                        Interface              Type     Message
-amf:metrics-endpoint                   grafana-agent:metrics-endpoint  prometheus_scrape      regular  
-grafana-agent:logging-provider         mongodb:logging                 loki_push_api          regular  
-grafana-agent:peers                    grafana-agent:peers             grafana_agent_replica  peer     
-mongodb:database                       amf:database                    mongodb_client         regular  
-mongodb:database                       nrf:database                    mongodb_client         regular  
-mongodb:database                       pcf:database                    mongodb_client         regular  
-mongodb:database                       smf:database                    mongodb_client         regular  
-mongodb:database                       udr:database                    mongodb_client         regular  
-mongodb:database                       webui:database                  mongodb_client         regular  
-mongodb:database-peers                 mongodb:database-peers          mongodb-peers          peer     
-mongodb:metrics-endpoint               grafana-agent:metrics-endpoint  prometheus_scrape      regular  
-nrf:fiveg_nrf                          amf:fiveg_nrf                   fiveg_nrf              regular  
-nrf:fiveg_nrf                          ausf:fiveg_nrf                  fiveg_nrf              regular  
-nrf:fiveg_nrf                          nssf:fiveg_nrf                  fiveg_nrf              regular  
-nrf:fiveg_nrf                          pcf:fiveg_nrf                   fiveg_nrf              regular  
-nrf:fiveg_nrf                          smf:fiveg_nrf                   fiveg_nrf              regular  
-nrf:fiveg_nrf                          udm:fiveg_nrf                   fiveg_nrf              regular  
-nrf:fiveg_nrf                          udr:fiveg_nrf                   fiveg_nrf              regular  
-self-signed-certificates:certificates  amf:certificates                tls-certificates       regular  
-self-signed-certificates:certificates  ausf:certificates               tls-certificates       regular  
-self-signed-certificates:certificates  nrf:certificates                tls-certificates       regular  
-self-signed-certificates:certificates  nssf:certificates               tls-certificates       regular  
-self-signed-certificates:certificates  pcf:certificates                tls-certificates       regular  
-self-signed-certificates:certificates  smf:certificates                tls-certificates       regular  
-self-signed-certificates:certificates  udm:certificates                tls-certificates       regular  
-self-signed-certificates:certificates  udr:certificates                tls-certificates       regular  
-smf:metrics-endpoint                   grafana-agent:metrics-endpoint  prometheus_scrape      regular  
-traefik:ingress                        nms:ingress                     ingress                regular  
-traefik:peers                          traefik:peers                   traefik_peers          peer     
-upf:metrics-endpoint                   grafana-agent:metrics-endpoint  prometheus_scrape      regular  
+amf:metrics-endpoint                   grafana-agent:metrics-endpoint  prometheus_scrape      regular
+grafana-agent:logging-provider         mongodb:logging                 loki_push_api          regular
+grafana-agent:peers                    grafana-agent:peers             grafana_agent_replica  peer
+mongodb:database                       amf:database                    mongodb_client         regular
+mongodb:database                       nrf:database                    mongodb_client         regular
+mongodb:database                       pcf:database                    mongodb_client         regular
+mongodb:database                       smf:database                    mongodb_client         regular
+mongodb:database                       udr:database                    mongodb_client         regular
+mongodb:database                       webui:database                  mongodb_client         regular
+mongodb:database-peers                 mongodb:database-peers          mongodb-peers          peer
+mongodb:metrics-endpoint               grafana-agent:metrics-endpoint  prometheus_scrape      regular
+nrf:fiveg_nrf                          amf:fiveg_nrf                   fiveg_nrf              regular
+nrf:fiveg_nrf                          ausf:fiveg_nrf                  fiveg_nrf              regular
+nrf:fiveg_nrf                          nssf:fiveg_nrf                  fiveg_nrf              regular
+nrf:fiveg_nrf                          pcf:fiveg_nrf                   fiveg_nrf              regular
+nrf:fiveg_nrf                          smf:fiveg_nrf                   fiveg_nrf              regular
+nrf:fiveg_nrf                          udm:fiveg_nrf                   fiveg_nrf              regular
+nrf:fiveg_nrf                          udr:fiveg_nrf                   fiveg_nrf              regular
+self-signed-certificates:certificates  amf:certificates                tls-certificates       regular
+self-signed-certificates:certificates  ausf:certificates               tls-certificates       regular
+self-signed-certificates:certificates  nrf:certificates                tls-certificates       regular
+self-signed-certificates:certificates  nssf:certificates               tls-certificates       regular
+self-signed-certificates:certificates  pcf:certificates                tls-certificates       regular
+self-signed-certificates:certificates  smf:certificates                tls-certificates       regular
+self-signed-certificates:certificates  udm:certificates                tls-certificates       regular
+self-signed-certificates:certificates  udr:certificates                tls-certificates       regular
+smf:metrics-endpoint                   grafana-agent:metrics-endpoint  prometheus_scrape      regular
+traefik:ingress                        nms:ingress                     ingress                regular
+traefik:peers                          traefik:peers                   traefik_peers          peer
+upf:metrics-endpoint                   grafana-agent:metrics-endpoint  prometheus_scrape      regular
 webui:sdcore-management                nms:sdcore-management           sdcore_management      regular
 ```
 
