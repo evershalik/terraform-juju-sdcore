@@ -16,7 +16,7 @@ variable "create_model" {
 variable "upf_channel" {
   description = "The channel to use when deploying `upf-k8s` charm."
   type        = string
-  default     = "1.4/edge"
+  default     = "1.3/edge"
 }
 
 variable "grafana_agent_channel" {
