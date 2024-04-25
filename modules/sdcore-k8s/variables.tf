@@ -16,7 +16,7 @@ variable "create_model" {
 variable "sdcore_channel" {
   description = "The channel to use when deploying Charmed Aether SD-Core charms."
   type        = string
-  default     = "1.4/edge"
+  default     = "1.5/edge"
 }
 
 variable "amf_config" {
