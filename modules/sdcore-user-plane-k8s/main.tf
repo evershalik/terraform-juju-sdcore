@@ -7,7 +7,7 @@ resource "juju_model" "sdcore" {
 }
 
 module "upf" {
-  source     = "git::https://github.com/canonical/sdcore-upf-k8s-operator//terraform"
+  source     = "git::https://github.com/canonical/sdcore-upf-k8s-operator//terraform?ref=v1.4"
   model_name = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
   channel    = var.upf_channel
   config     = var.upf_config
