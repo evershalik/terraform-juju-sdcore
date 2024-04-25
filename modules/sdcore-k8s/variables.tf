@@ -28,7 +28,7 @@ variable "ausf_channel" {
 variable "nms_channel" {
   description = "The channel to use when deploying `sdcore-nms-k8s` charm."
   type        = string
-  default     = "1.3/edge"
+  default     = "1.4/edge"
 }
 
 variable "nrf_channel" {
@@ -128,7 +128,7 @@ variable "mongo_config" {
 variable "self_signed_certificates_channel" {
   description = "The channel to use when deploying `self-signed-certificates-operator` charm."
   type        = string
-  default     = "latest/beta"
+  default     = "latest/stable"
 }
 variable "self_signed_certificates_config" {
   description = "Additional configuration for the Self-Signed-Certificates. Details about available options can be found at https://charmhub.io/self-signed-certificates-operator/configure."
