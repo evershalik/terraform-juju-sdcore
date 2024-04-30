@@ -21,6 +21,8 @@ updates:
       interval: "weekly"
     commit-message:
       prefix: "chore: "
+    labels:
+      - v1.4
 
   - package-ecosystem: "terraform"
     target-branch: v1.4
@@ -29,3 +31,5 @@ updates:
       interval: "weekly"
     commit-message:
       prefix: "chore: "
+    labels:
+      - v1.4
