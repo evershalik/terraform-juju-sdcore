@@ -108,7 +108,7 @@ variable "cos_configuration_config" {
   type        = map(string)
   default = {
     git_repo                = "https://github.com/canonical/sdcore-cos-configuration"
-    git_branch              = "main"
+    git_branch              = "v1.4"
     grafana_dashboards_path = "grafana_dashboards/sdcore/"
   }
 }
