@@ -26,7 +26,7 @@ variable "grafana_agent_channel" {
 }
 
 variable "upf_config" {
-  description = "Application config for the AMF. Details about available options can be found at https://charmhub.io/sdcore-upf-k8s-operator/configure."
+  description = "Application config for the UPF. Details about available options can be found at https://charmhub.io/sdcore-upf-k8s-operator/configure."
   type        = map(string)
   default     = {}
 }
