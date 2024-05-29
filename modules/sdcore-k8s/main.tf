@@ -269,20 +269,6 @@ resource "juju_integration" "smf-database" {
   }
 }
 
-resource "juju_integration" "pcf-database" {
-  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
-
-  application {
-    name     = module.pcf.app_name
-    endpoint = module.pcf.database_endpoint
-  }
-
-  application {
-    name     = module.mongodb.app_name
-    endpoint = module.mongodb.database_endpoint
-  }
-}
-
 resource "juju_integration" "nrf-database" {
   model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
 

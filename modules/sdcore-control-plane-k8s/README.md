@@ -148,7 +148,6 @@ grafana-agent:logging-provider         mongodb:logging                 loki_push
 grafana-agent:peers                    grafana-agent:peers             grafana_agent_replica  peer     
 mongodb:database                       amf:database                    mongodb_client         regular  
 mongodb:database                       nrf:database                    mongodb_client         regular  
-mongodb:database                       pcf:database                    mongodb_client         regular  
 mongodb:database                       smf:database                    mongodb_client         regular  
 mongodb:database                       udr:database                    mongodb_client         regular  
 mongodb:database                       webui:database                  mongodb_client         regular  
