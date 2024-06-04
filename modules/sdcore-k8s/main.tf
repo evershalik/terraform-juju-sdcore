@@ -311,6 +311,36 @@ resource "juju_integration" "webui-common-database" {
   }
 }
 
+# Integrations for `sdcore-config` endpoint
+
+resource "juju_integration" "amf-sdcore-config" {
+  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+
+  application {
+    name     = module.amf.app_name
+    endpoint = module.amf.sdcore_config_endpoint
+  }
+
+  application {
+    name     = module.webui.app_name
+    endpoint = module.webui.sdcore_config_endpoint
+  }
+}
+
+resource "juju_integration" "ausf-sdcore-config" {
+  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+
+  application {
+    name     = module.ausf.app_name
+    endpoint = module.ausf.sdcore_config_endpoint
+  }
+
+  application {
+    name     = module.webui.app_name
+    endpoint = module.webui.sdcore_config_endpoint
+  }
+}
+
 # Integrations for `metrics` endpoint
 
 resource "juju_integration" "amf-metrics" {
