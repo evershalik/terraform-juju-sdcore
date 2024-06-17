@@ -31,12 +31,12 @@ module "mongodb-operator" {
 Create the integrations, for instance:
 
 ```text
-resource "juju_integration" "nrf-db" {
+resource "juju_integration" "amf-db" {
   model = var.model_name
 
   application {
-    name     = module.nrf.app_name
-    endpoint = module.nrf.database_endpoint
+    name     = module.amf.app_name
+    endpoint = module.amf.database_endpoint
   }
 
   application {

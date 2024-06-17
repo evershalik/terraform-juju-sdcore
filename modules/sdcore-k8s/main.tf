@@ -213,6 +213,20 @@ resource "juju_integration" "ausf-fiveg-nrf" {
 
 # Integrations for `database` endpoint
 
+resource "juju_integration" "amf-database" {
+  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+
+  application {
+    name     = module.amf.app_name
+    endpoint = module.amf.database_endpoint
+  }
+
+  application {
+    name     = module.mongodb.app_name
+    endpoint = module.mongodb.database_endpoint
+  }
+}
+
 resource "juju_integration" "udr-auth-database" {
   model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
 
