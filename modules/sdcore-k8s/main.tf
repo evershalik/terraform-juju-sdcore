@@ -441,12 +441,12 @@ resource "juju_integration" "amf-metrics" {
   }
 }
 
-resource "juju_integration" "smf-metrics" {
+resource "juju_integration" "ausf-metrics" {
   model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
 
   application {
-    name     = module.smf.app_name
-    endpoint = module.smf.metrics_endpoint
+    name     = module.ausf.app_name
+    endpoint = module.ausf.metrics_endpoint
   }
 
   application {
@@ -461,6 +461,90 @@ resource "juju_integration" "mongodb-metrics" {
   application {
     name     = module.mongodb.app_name
     endpoint = module.mongodb.metrics_endpoint
+  }
+
+  application {
+    name     = module.grafana-agent.app_name
+    endpoint = module.grafana-agent.metrics_endpoint
+  }
+}
+
+resource "juju_integration" "nrf-metrics" {
+  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+
+  application {
+    name     = module.nrf.app_name
+    endpoint = module.nrf.metrics_endpoint
+  }
+
+  application {
+    name     = module.grafana-agent.app_name
+    endpoint = module.grafana-agent.metrics_endpoint
+  }
+}
+
+resource "juju_integration" "nssf-metrics" {
+  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+
+  application {
+    name     = module.nssf.app_name
+    endpoint = module.nssf.metrics_endpoint
+  }
+
+  application {
+    name     = module.grafana-agent.app_name
+    endpoint = module.grafana-agent.metrics_endpoint
+  }
+}
+
+resource "juju_integration" "pcf-metrics" {
+  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+
+  application {
+    name     = module.pcf.app_name
+    endpoint = module.pcf.metrics_endpoint
+  }
+
+  application {
+    name     = module.grafana-agent.app_name
+    endpoint = module.grafana-agent.metrics_endpoint
+  }
+}
+
+resource "juju_integration" "smf-metrics" {
+  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+
+  application {
+    name     = module.smf.app_name
+    endpoint = module.smf.metrics_endpoint
+  }
+
+  application {
+    name     = module.grafana-agent.app_name
+    endpoint = module.grafana-agent.metrics_endpoint
+  }
+}
+
+resource "juju_integration" "udm-metrics" {
+  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+
+  application {
+    name     = module.udm.app_name
+    endpoint = module.udm.metrics_endpoint
+  }
+
+  application {
+    name     = module.grafana-agent.app_name
+    endpoint = module.grafana-agent.metrics_endpoint
+  }
+}
+
+resource "juju_integration" "udr-metrics" {
+  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+
+  application {
+    name     = module.udr.app_name
+    endpoint = module.udr.metrics_endpoint
   }
 
   application {

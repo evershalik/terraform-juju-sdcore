@@ -120,6 +120,7 @@ grafana-agent/0*  blocked   idle   10.1.146.98         send-remote-write: off, g
 upf/0*            active    idle   10.1.146.87         
 
 Integration provider  Requirer                        Interface              Type     Message
+upf:metrics-endpoint  grafana-agent:metrics-endpoint  prometheus_scrape      regular  
 grafana-agent:peers   grafana-agent:peers             grafana_agent_replica  peer   
 ```
 

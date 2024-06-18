@@ -147,6 +147,7 @@ webui/0*                     active    idle   10.1.146.65
 
 Integration provider                   Requirer                        Interface              Type     Message
 amf:metrics-endpoint                   grafana-agent:metrics-endpoint  prometheus_scrape      regular  
+ausf:metrics-endpoint                   grafana-agent:metrics-endpoint prometheus_scrape      regular  
 grafana-agent:logging-provider         mongodb:logging                 loki_push_api          regular  
 grafana-agent:peers                    grafana-agent:peers             grafana_agent_replica  peer     
 mongodb:database                       amf:database                    mongodb_client         regular  
@@ -163,6 +164,9 @@ nrf:fiveg_nrf                          pcf:fiveg_nrf                   fiveg_nrf
 nrf:fiveg_nrf                          smf:fiveg_nrf                   fiveg_nrf              regular  
 nrf:fiveg_nrf                          udm:fiveg_nrf                   fiveg_nrf              regular  
 nrf:fiveg_nrf                          udr:fiveg_nrf                   fiveg_nrf              regular  
+nrf:metrics-endpoint                   grafana-agent:metrics-endpoint  prometheus_scrape      regular  
+nssf:metrics-endpoint                  grafana-agent:metrics-endpoint  prometheus_scrape      regular  
+pcf:metrics-endpoint                   grafana-agent:metrics-endpoint  prometheus_scrape      regular  
 self-signed-certificates:certificates  amf:certificates                tls-certificates       regular  
 self-signed-certificates:certificates  ausf:certificates               tls-certificates       regular  
 self-signed-certificates:certificates  nrf:certificates                tls-certificates       regular  
@@ -174,6 +178,8 @@ self-signed-certificates:certificates  udr:certificates                tls-certi
 smf:metrics-endpoint                   grafana-agent:metrics-endpoint  prometheus_scrape      regular  
 traefik:ingress                        nms:ingress                     ingress                regular  
 traefik:peers                          traefik:peers                   traefik_peers          peer     
+udm:metrics-endpoint                   grafana-agent:metrics-endpoint  prometheus_scrape      regular  
+udr:metrics-endpoint                   grafana-agent:metrics-endpoint  prometheus_scrape      regular  
 upf:metrics-endpoint                   grafana-agent:metrics-endpoint  prometheus_scrape      regular  
 webui:sdcore-management                nms:sdcore-management           sdcore_management      regular
 ```
