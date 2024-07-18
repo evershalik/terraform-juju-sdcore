@@ -88,7 +88,7 @@ terraform apply -var-file="terraform.tfvars" -auto-approve
 
 #### Including Canonical Observability Stack (COS)
 
-The `sdcore-k8s` Terraform module offers an option to automatically deploy COS. To use it,
+The `sdcore-user-plane-k8s` Terraform module offers an option to automatically deploy COS. To use it,
 add following variable to your `terraform.tfvars`:
 
 ```text

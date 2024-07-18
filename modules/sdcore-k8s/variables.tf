@@ -4,7 +4,7 @@
 variable "model_name" {
   description = "Name of Juju model to deploy application to."
   type        = string
-  default     = ""
+  default     = "sdcore"
 }
 
 variable "create_model" {
