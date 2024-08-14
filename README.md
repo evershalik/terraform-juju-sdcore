@@ -4,7 +4,7 @@ This project contains 3 [Terraform][Terraform] modules to deploy the following S
 
 The modules use the [Terraform Juju provider][Terraform Juju provider] to model the bundle deployment onto any Kubernetes environment managed by [Juju][Juju].
 
-`sdcore-k8s` module deploys a standalone 5G core network. This module contains the 5G control plane functions, the UPF, Webui, Grafana Agent, Traefik, Self Signed Certificates and MongoDB.
+`sdcore-k8s` module deploys a standalone 5G core network. This module contains the 5G control plane functions, the UPF, NMS, Grafana Agent, Traefik, Self Signed Certificates and MongoDB.
 
 `sdcore-control-plane-k8s` module deploys the 5G control plane and the `sdcore-user-plane-k8s` module deploys only the 5G user plane. Hence, the SD-Core 5G core network deployment could be performed following the Control and User Plane Separation (CUPS) principles.
 
