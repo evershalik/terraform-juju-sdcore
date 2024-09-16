@@ -235,20 +235,6 @@ resource "juju_integration" "udr-common-database" {
   }
 }
 
-resource "juju_integration" "smf-database" {
-  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
-
-  application {
-    name     = module.smf.app_name
-    endpoint = module.smf.database_endpoint
-  }
-
-  application {
-    name     = module.mongodb.app_name
-    endpoint = module.mongodb.database_endpoint
-  }
-}
-
 resource "juju_integration" "nrf-database" {
   model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
 

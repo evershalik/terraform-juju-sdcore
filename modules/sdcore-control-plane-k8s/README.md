@@ -148,7 +148,6 @@ grafana-agent:peers                    grafana-agent:peers             grafana_a
 mongodb:database                       nms:auth_database               mongodb_client         regular  
 mongodb:database                       nms:common_database             mongodb_client         regular 
 mongodb:database                       nrf:database                    mongodb_client         regular  
-mongodb:database                       smf:database                    mongodb_client         regular  
 mongodb:database                       udr:database                    mongodb_client         regular    
 mongodb:database-peers                 mongodb:database-peers          mongodb-peers          peer     
 mongodb:metrics-endpoint               grafana-agent:metrics-endpoint  prometheus_scrape      regular  
