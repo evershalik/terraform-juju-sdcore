@@ -14,3 +14,17 @@ module "upf" {
   config         = var.upf_config
   machine_number = var.machine_number
 }
+
+# Cross-model integrations
+
+resource "juju_offer" "upf-fiveg-n3" {
+  model            = var.model_name
+  application_name = module.upf.app_name
+  endpoint         = module.upf.fiveg_n3_endpoint
+}
+
+resource "juju_offer" "upf-fiveg-n4" {
+  model            = var.model_name
+  application_name = module.upf.app_name
+  endpoint         = module.upf.fiveg_n4_endpoint
+}

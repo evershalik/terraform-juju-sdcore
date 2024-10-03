@@ -86,17 +86,6 @@ Deploy the resources:
 terraform apply -var-file="terraform.tfvars" -auto-approve 
 ```
 
-#### Including Canonical Observability Stack (COS)
-
-The `sdcore-user-plane-k8s` Terraform module offers an option to automatically deploy COS. To use it,
-add following variable to your `terraform.tfvars`:
-
-```text
-deploy_cos = true
-```
-
-Please inspect the `variables.tf` file to see all available config options.
-
 ### Checking the result
 
 Run `juju switch <juju model>` to switch to the target Juju model and observe the status of the applications.

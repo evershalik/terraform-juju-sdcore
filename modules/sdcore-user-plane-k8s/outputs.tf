@@ -1,31 +1,28 @@
 # Copyright 2024 Canonical Ltd.
 # See LICENSE file for licensing details.
 
-output "upf_app_name" {
-  description = "Name of the deployed UPF application."
-  value       = module.upf.app_name
+# Integration offers for external systems
+
+output "upf_fiveg_n3_offer_url" {
+  description = "UPF `fiveg_n3` offer."
+  value       = juju_offer.upf-fiveg-n3.url
 }
 
-output "fiveg_n3_endpoint" {
-  description = "Name of the endpoint used to provide information on connectivity to the N3 plane."
-  value       = module.upf.fiveg_n3_endpoint
+output "upf_fiveg_n4_offer_url" {
+  description = "UPF `fiveg_n4` offer."
+  value       = juju_offer.upf-fiveg-n4.url
 }
 
-output "fiveg_n4_endpoint" {
-  description = "Name of the endpoint used to provide information on connectivity to the N4 plane."
-  value       = module.upf.fiveg_n4_endpoint
-}
+# Outputs required to consume external offers
 
 output "grafana_agent_app_name" {
-  description = "Name of the deployed Grafana-agent application."
+  description = "Name of the deployed Grafana Agent application."
   value       = module.grafana-agent.app_name
 }
-
 output "send_remote_write_endpoint" {
   description = "Name of the endpoint to forward client charms metrics and associated alert rules to Prometheus using prometheus_remote_write interface."
   value       = module.grafana-agent.send_remote_write_endpoint
 }
-
 output "logging_consumer_endpoint" {
   description = "Name of the endpoint to send the logs to Loki using loki_push_api interface."
   value       = module.grafana-agent.logging_consumer_endpoint

@@ -97,14 +97,6 @@ module "upf" {
   config     = var.upf_config
 }
 
-module "cos-lite" {
-  count                    = var.deploy_cos ? 1 : 0
-  source                   = "../external/cos-lite"
-  model_name               = var.cos_model_name
-  deploy_cos_configuration = true
-  cos_configuration_config = var.cos_configuration_config
-}
-
 # Integrations for `fiveg-nrf` endpoint
 
 resource "juju_integration" "amf-fiveg-nrf" {
@@ -837,43 +829,15 @@ resource "juju_integration" "upf-nms" {
 
 # Cross-model integrations
 
-resource "juju_offer" "prometheus-remote-write" {
-  count            = var.deploy_cos ? 1 : 0
-  model            = module.cos-lite[0].model_name
-  application_name = module.cos-lite[0].prometheus_app_name
-  endpoint         = "receive-remote-write"
-}
-resource "juju_offer" "loki-logging" {
-  count            = var.deploy_cos ? 1 : 0
-  model            = module.cos-lite[0].model_name
-  application_name = module.cos-lite[0].loki_app_name
-  endpoint         = "logging"
+resource "juju_offer" "amf-fiveg-n2" {
+  model            = var.model_name
+  application_name = module.amf.app_name
+  endpoint         = module.amf.fiveg_n2_endpoint
 }
 
-resource "juju_integration" "prometheus" {
-  count = var.deploy_cos ? 1 : 0
-  model = var.model_name
-
-  application {
-    name     = module.grafana-agent.app_name
-    endpoint = module.grafana-agent.send_remote_write_endpoint
-  }
-
-  application {
-    offer_url = juju_offer.prometheus-remote-write[0].url
-  }
+resource "juju_offer" "upf-fiveg-n3" {
+  model            = var.model_name
+  application_name = module.upf.app_name
+  endpoint         = module.upf.fiveg_n3_endpoint
 }
-
-resource "juju_integration" "loki" {
-  count = var.deploy_cos ? 1 : 0
-  model = var.model_name
-
-  application {
-    name     = module.grafana-agent.app_name
-    endpoint = module.grafana-agent.logging_consumer_endpoint
-  }
-
-  application {
-    offer_url = juju_offer.loki-logging[0].url
-  }
 }

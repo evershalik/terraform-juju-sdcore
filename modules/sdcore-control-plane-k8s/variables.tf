@@ -80,25 +80,3 @@ variable "traefik_config" {
     routing_mode = "subdomain"
   }
 }
-
-# Canonical Observability Stack (COS)
-
-variable "deploy_cos" {
-  description = "When set to `true`, COS will be deployed along with SD-Core. COS will use a separate model on the same Juju controller."
-  type        = bool
-  default     = false
-}
-variable "cos_model_name" {
-  description = "Name of Juju model to deploy COS to."
-  type        = string
-  default     = "cos-lite"
-}
-variable "cos_configuration_config" {
-  description = "COS Configuration application config. Details about available options can be found at https://charmhub.io/cos-configuration-k8s/configure."
-  type        = map(string)
-  default = {
-    git_repo                = "https://github.com/canonical/sdcore-cos-configuration"
-    git_branch              = "main"
-    grafana_dashboards_path = "grafana_dashboards/sdcore/"
-  }
-}
