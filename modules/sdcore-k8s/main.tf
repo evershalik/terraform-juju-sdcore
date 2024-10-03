@@ -840,4 +840,3 @@ resource "juju_offer" "upf-fiveg-n3" {
   application_name = module.upf.app_name
   endpoint         = module.upf.fiveg_n3_endpoint
 }
-}
