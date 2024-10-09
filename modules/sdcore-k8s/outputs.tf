@@ -21,7 +21,7 @@ output "nms_app_name" {
 }
 output "fiveg_gnb_identity_endpoint" {
   description = "Name of the endpoint to integrate with fiveg_gnb_identity interface."
-  value       = module.nms.fiveg_gnb_identity_endpoint
+  value       = module.nms.requires.fiveg_gnb_identity
 }
 
 output "grafana_agent_app_name" {

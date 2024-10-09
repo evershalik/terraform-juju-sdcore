@@ -1,16 +1,10 @@
 # Copyright 2024 Canonical Ltd.
 # See LICENSE file for licensing details.
 
-variable "model_name" {
-  description = "Name of Juju model to deploy application to."
+variable "model" {
+  description = "Reference to a juju_model to deploy application to."
   type        = string
   default     = ""
-}
-
-variable "create_model" {
-  description = "Allows to skip Juju model creation and re-use a model created in a higher level module."
-  type        = bool
-  default     = true
 }
 
 variable "upf_channel" {

@@ -1,21 +1,20 @@
 # Copyright 2024 Canonical Ltd.
 # See LICENSE file for licensing details.
 
-resource "juju_model" "sdcore" {
-  count = var.create_model == true ? 1 : 0
-  name  = var.model_name
+data "juju_model" "sdcore_upf" {
+  name = var.model
 }
 
 module "upf" {
-  source     = "git::https://github.com/canonical/sdcore-upf-k8s-operator//terraform"
-  model_name = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
-  channel    = var.upf_channel
-  config     = var.upf_config
+  source  = "git::https://github.com/canonical/sdcore-upf-k8s-operator//terraform"
+  model   = data.juju_model.sdcore_upf.name
+  channel = var.upf_channel
+  config  = var.upf_config
 }
 
 module "grafana-agent" {
   source     = "../external/grafana-agent-k8s"
-  model_name = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+  model_name = data.juju_model.sdcore_upf.name
   channel    = var.grafana_agent_channel
   config     = var.grafana_agent_config
 }
@@ -23,11 +22,11 @@ module "grafana-agent" {
 # Integrations for `metrics` endpoint
 
 resource "juju_integration" "upf-metrics" {
-  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+  model = data.juju_model.sdcore_upf.name
 
   application {
     name     = module.upf.app_name
-    endpoint = module.upf.metrics_endpoint
+    endpoint = module.upf.provides.metrics
   }
 
   application {
@@ -39,11 +38,11 @@ resource "juju_integration" "upf-metrics" {
 # Integrations for `logging` endpoint
 
 resource "juju_integration" "upf-logging" {
-  model = var.create_model == true ? juju_model.sdcore[0].name : var.model_name
+  model = data.juju_model.sdcore_upf.name
 
   application {
     name     = module.upf.app_name
-    endpoint = module.upf.logging_endpoint
+    endpoint = module.upf.requires.logging
   }
 
   application {
@@ -55,13 +54,15 @@ resource "juju_integration" "upf-logging" {
 # Cross-model integrations
 
 resource "juju_offer" "upf-fiveg-n3" {
-  model            = var.model_name
+  model            = data.juju_model.sdcore_upf.name
   application_name = module.upf.app_name
-  endpoint         = module.upf.fiveg_n3_endpoint
+  endpoint         = module.upf.provides.fiveg_n3
+  name             = "upf-fiveg-n3"
 }
 
 resource "juju_offer" "upf-fiveg-n4" {
-  model            = var.model_name
+  model            = data.juju_model.sdcore_upf.name
   application_name = module.upf.app_name
-  endpoint         = module.upf.fiveg_n4_endpoint
+  endpoint         = module.upf.provides.fiveg_n4
+  name             = "upf-fiveg-n4"
 }

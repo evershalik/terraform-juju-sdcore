@@ -11,7 +11,7 @@ This module is used to deploy a standalone 5G core network including 5G control 
 - **main.tf** - Defines the Juju application to be deployed.
 - **variables.tf** - Allows customization of the deployment including Juju model name, charm's channel and configuration.
 - **output.tf** - Responsible for integrating the module with other Terraform modules, primarily by defining potential integration endpoints (charm integrations).
-- **terraform.tf** - Defines the Terraform provider.
+- **versions.tf** - Defines the Terraform provider.
 
 ## Deploying sdcore-k8s module
 
@@ -70,11 +70,11 @@ Initialize the provider:
 terraform init
 ```
 
-Create the `terraform.tfvars` file to specify the name of the Juju model to deploy to. Reusing already existing model is not recommended.
+Create the `terraform.tfvars` file to specify the name of the Juju model to deploy to. The model needs to be created outside of this module.
 
 ```console
 cat << EOF | tee terraform.tfvars
-model_name = "put your model-name here"
+model = "my_model_name"
 
 # Customize the configuration variables here if needed
 EOF
