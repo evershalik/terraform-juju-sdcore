@@ -638,6 +638,34 @@ resource "juju_integration" "udr-certificates" {
   }
 }
 
+resource "juju_integration" "nms-certificates" {
+  model = data.juju_model.sdcore.name
+
+  application {
+    name     = module.nms.app_name
+    endpoint = module.nms.requires.certificates
+  }
+
+  application {
+    name     = module.self-signed-certificates.app_name
+    endpoint = module.self-signed-certificates.certificates_endpoint
+  }
+}
+
+resource "juju_integration" "traefik-certificates" {
+  model = data.juju_model.sdcore.name
+
+  application {
+    name     = module.traefik.app_name
+    endpoint = module.traefik.requires.certificates
+  }
+
+  application {
+    name     = module.self-signed-certificates.app_name
+    endpoint = module.self-signed-certificates.certificates_endpoint
+  }
+}
+
 # Integrations for `ingress` endpoint
 
 resource "juju_integration" "nms-ingress" {
