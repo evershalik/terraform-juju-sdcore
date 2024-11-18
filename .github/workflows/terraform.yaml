@@ -13,7 +13,7 @@ on:
 jobs:
   check-terraform-module:
     name: Check Terraform Module
-    uses: canonical/sdcore-github-workflows/.github/workflows/terraform.yaml@v1.0.0
+    uses: canonical/sdcore-github-workflows/.github/workflows/terraform.yaml@v2.1.0
     secrets: inherit
     with:
       working-directory: ./modules
