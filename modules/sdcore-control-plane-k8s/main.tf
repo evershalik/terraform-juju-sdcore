@@ -636,7 +636,7 @@ resource "juju_integration" "traefik-certificates" {
 
   application {
     name     = module.traefik.app_name
-    endpoint = module.traefik.requires.certificates
+    endpoint = module.traefik.certificates_endpoint
   }
 
   application {
