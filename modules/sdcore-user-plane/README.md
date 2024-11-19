@@ -21,7 +21,7 @@ The module can be used to deploy the `sdcore-user-plane` separately as well as a
   - Ubuntu 24.04
   - CPU supporting AVX2 and RDRAND instructions (Intel Haswell, AMD Excavator or equivalent)
 - Juju host
-  - Juju>=3.4
+  - Juju>=3.5
 - Terraform
 
 ### Preparing deployment environment
@@ -29,7 +29,7 @@ The module can be used to deploy the `sdcore-user-plane` separately as well as a
 Install Juju:
 
 ```shell
-sudo snap install juju --channel=3.4/stable
+sudo snap install juju --channel=3.5/stable
 ```
 
 Create `manual` cloud on Juju host: 
