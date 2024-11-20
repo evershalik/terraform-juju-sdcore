@@ -261,6 +261,20 @@ resource "juju_integration" "nms-common-database" {
   }
 }
 
+resource "juju_integration" "nms-webui-database" {
+  model = data.juju_model.sdcore.name
+
+  application {
+    name     = module.nms.app_name
+    endpoint = module.nms.requires.webui_database
+  }
+
+  application {
+    name     = module.mongodb.app_name
+    endpoint = module.mongodb.database_endpoint
+  }
+}
+
 # Integrations for `sdcore_config` endpoint
 
 resource "juju_integration" "amf-sdcore-config" {
