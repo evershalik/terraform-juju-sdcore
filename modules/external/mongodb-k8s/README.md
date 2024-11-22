@@ -51,4 +51,4 @@ Please check the available [integration pairs][integration pairs].
 [Terraform]: https://www.terraform.io/
 [Juju]: https://juju.is
 [Terraform Juju provider]: https://registry.terraform.io/providers/juju/juju/latest
-[integration pairs]: https://charmhub.io/mongodb-k8s/integrations?channel=6/edge
+[integration pairs]: https://charmhub.io/mongodb-k8s/integrations?channel=6/stable

@@ -48,10 +48,10 @@ variable "grafana_agent_config" {
 variable "mongo_channel" {
   description = "The channel to use when deploying `mongodb-k8s` charm."
   type        = string
-  default     = "6/beta"
+  default     = "6/stable"
 }
 variable "mongo_config" {
-  description = "Additional configuration for the MongoDB. Details about available options can be found at https://charmhub.io/mongodb-k8s/configure?channel=6/beta."
+  description = "Additional configuration for the MongoDB. Details about available options can be found at https://charmhub.io/mongodb-k8s/configurations?channel=6/stable."
   type        = map(string)
   default     = {}
 }
