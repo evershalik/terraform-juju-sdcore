@@ -183,7 +183,7 @@ data "juju_model" "sdcore" {
 }
 
 module "sdcore-control-plane" {
-  source = "git::https://github.com/canonical/https://github.com/canonical/terraform-juju-sdcore-k8s//modules/sdcore-control-plane-k8s"
+  source = "git::https://github.com/canonical/https://github.com/canonical/terraform-juju-sdcore-k8s//modules/sdcore-control-plane-k8s?ref=v1.5"
   
   model = data.juju_model.sdcore.name
   (Customize configuration variables here if needed)

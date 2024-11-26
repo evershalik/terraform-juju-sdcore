@@ -127,7 +127,7 @@ If you want to use `sdcore-user-plane-k8s` module as part of your Terraform modu
 
 ```text
 module "sdcore-user-plane" {
-  source = "git::https://github.com/canonical/https://github.com/canonical/terraform-juju-sdcore-k8s//modules/sdcore-user-plane-k8s"
+  source = "git::https://github.com/canonical/https://github.com/canonical/terraform-juju-sdcore-k8s//modules/sdcore-user-plane-k8s?ref=v1.5"
   
   model_name = "juju_model_name"
   (Customize configuration variables here if needed)

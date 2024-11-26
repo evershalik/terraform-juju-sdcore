@@ -6,57 +6,57 @@ data "juju_model" "sdcore" {
 }
 
 module "amf" {
-  source  = "git::https://github.com/canonical/sdcore-amf-k8s-operator//terraform"
+  source  = "git::https://github.com/canonical/sdcore-amf-k8s-operator//terraform?ref=v1.5"
   model   = data.juju_model.sdcore.name
   channel = var.sdcore_channel
   config  = var.amf_config
 }
 
 module "ausf" {
-  source  = "git::https://github.com/canonical/sdcore-ausf-k8s-operator//terraform"
+  source  = "git::https://github.com/canonical/sdcore-ausf-k8s-operator//terraform?ref=v1.5"
   model   = data.juju_model.sdcore.name
   channel = var.sdcore_channel
 }
 
 module "nms" {
-  source  = "git::https://github.com/canonical/sdcore-nms-k8s-operator//terraform"
+  source  = "git::https://github.com/canonical/sdcore-nms-k8s-operator//terraform?ref=v1.5"
   model   = data.juju_model.sdcore.name
   channel = var.sdcore_channel
 }
 
 module "nrf" {
-  source  = "git::https://github.com/canonical/sdcore-nrf-k8s-operator//terraform"
+  source  = "git::https://github.com/canonical/sdcore-nrf-k8s-operator//terraform?ref=v1.5"
   model   = data.juju_model.sdcore.name
   channel = var.sdcore_channel
 }
 
 module "nssf" {
-  source  = "git::https://github.com/canonical/sdcore-nssf-k8s-operator//terraform"
+  source  = "git::https://github.com/canonical/sdcore-nssf-k8s-operator//terraform?ref=v1.5"
   model   = data.juju_model.sdcore.name
   channel = var.sdcore_channel
   config  = var.nssf_config
 }
 
 module "pcf" {
-  source  = "git::https://github.com/canonical/sdcore-pcf-k8s-operator//terraform"
+  source  = "git::https://github.com/canonical/sdcore-pcf-k8s-operator//terraform?ref=v1.5"
   model   = data.juju_model.sdcore.name
   channel = var.sdcore_channel
 }
 
 module "smf" {
-  source  = "git::https://github.com/canonical/sdcore-smf-k8s-operator//terraform"
+  source  = "git::https://github.com/canonical/sdcore-smf-k8s-operator//terraform?ref=v1.5"
   model   = data.juju_model.sdcore.name
   channel = var.sdcore_channel
 }
 
 module "udm" {
-  source  = "git::https://github.com/canonical/sdcore-udm-k8s-operator//terraform"
+  source  = "git::https://github.com/canonical/sdcore-udm-k8s-operator//terraform?ref=v1.5"
   model   = data.juju_model.sdcore.name
   channel = var.sdcore_channel
 }
 
 module "udr" {
-  source  = "git::https://github.com/canonical/sdcore-udr-k8s-operator//terraform"
+  source  = "git::https://github.com/canonical/sdcore-udr-k8s-operator//terraform?ref=v1.5"
   model   = data.juju_model.sdcore.name
   channel = var.sdcore_channel
 }
@@ -90,7 +90,7 @@ module "traefik" {
 }
 
 module "upf" {
-  source  = "git::https://github.com/canonical/sdcore-upf-k8s-operator//terraform"
+  source  = "git::https://github.com/canonical/sdcore-upf-k8s-operator//terraform?ref=v1.5"
   model   = data.juju_model.sdcore.name
   channel = var.sdcore_channel
   config  = var.upf_config
