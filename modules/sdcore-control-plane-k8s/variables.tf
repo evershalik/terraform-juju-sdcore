@@ -9,7 +9,7 @@ variable "model" {
 variable "sdcore_channel" {
   description = "The channel to use when deploying Charmed Aether SD-Core charms."
   type        = string
-  default     = "1.5/edge"
+  default     = "1.6/edge"
 }
 
 variable "mongo_channel" {

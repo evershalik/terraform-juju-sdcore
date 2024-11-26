@@ -10,7 +10,7 @@ variable "model" {
 variable "upf_channel" {
   description = "The channel to use when deploying `sdcore-upf-k8s` charm."
   type        = string
-  default     = "1.5/edge"
+  default     = "1.6/edge"
 }
 
 variable "grafana_agent_channel" {
