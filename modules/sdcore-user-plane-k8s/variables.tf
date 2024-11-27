@@ -25,6 +25,18 @@ variable "upf_config" {
   default     = {}
 }
 
+variable "upf_resources" {
+  description = "Resources to use with the application. Details about available options can be found at https://charmhub.io/sdcore-upf-k8s-operator/configure."
+  type        = map(string)
+  default     = {}
+}
+
+variable "upf_revision" {
+  description = "Revision number of the UPF charm"
+  type        = number
+  default     = null
+}
+
 variable "grafana_agent_config" {
   description = "Additional configuration for the Grafana Agent. Details about available options can be found at https://charmhub.io/grafana-agent-k8s/configure."
   type        = map(string)
