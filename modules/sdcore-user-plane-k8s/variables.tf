@@ -10,7 +10,7 @@ variable "model" {
 variable "upf_channel" {
   description = "The channel to use when deploying `sdcore-upf-k8s` charm."
   type        = string
-  default     = "1.5/edge"
+  default     = "1.5/stable"
 }
 
 variable "grafana_agent_channel" {
@@ -23,6 +23,18 @@ variable "upf_config" {
   description = "Application config for the UPF. Details about available options can be found at https://charmhub.io/sdcore-upf-k8s-operator/configure."
   type        = map(string)
   default     = {}
+}
+
+variable "upf_resources" {
+  description = "Resources to use with the application. Details about available options can be found at https://charmhub.io/sdcore-upf-k8s-operator/configure."
+  type        = map(string)
+  default     = {}
+}
+
+variable "upf_revision" {
+  description = "Revision number of the UPF charm"
+  type        = number
+  default     = null
 }
 
 variable "grafana_agent_config" {

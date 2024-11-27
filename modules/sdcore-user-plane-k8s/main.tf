@@ -6,10 +6,12 @@ data "juju_model" "sdcore_upf" {
 }
 
 module "upf" {
-  source  = "git::https://github.com/canonical/sdcore-upf-k8s-operator//terraform?ref=v1.5"
-  model   = data.juju_model.sdcore_upf.name
-  channel = var.upf_channel
-  config  = var.upf_config
+  source    = "git::https://github.com/canonical/sdcore-upf-k8s-operator//terraform?ref=v1.5"
+  model     = data.juju_model.sdcore_upf.name
+  channel   = var.upf_channel
+  config    = var.upf_config
+  revision  = var.upf_revision
+  resources = var.upf_resources
 }
 
 module "grafana-agent" {

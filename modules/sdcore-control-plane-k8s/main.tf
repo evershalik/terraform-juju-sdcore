@@ -6,59 +6,77 @@ data "juju_model" "sdcore" {
 }
 
 module "amf" {
-  source  = "git::https://github.com/canonical/sdcore-amf-k8s-operator//terraform?ref=v1.5"
-  model   = data.juju_model.sdcore.name
-  channel = var.sdcore_channel
-  config  = var.amf_config
+  source    = "git::https://github.com/canonical/sdcore-amf-k8s-operator//terraform?ref=v1.5"
+  model     = data.juju_model.sdcore.name
+  channel   = var.sdcore_channel
+  config    = var.amf_config
+  revision  = var.amf_revision
+  resources = var.amf_resources
 }
 
 module "ausf" {
-  source  = "git::https://github.com/canonical/sdcore-ausf-k8s-operator//terraform?ref=v1.5"
-  model   = data.juju_model.sdcore.name
-  channel = var.sdcore_channel
+  source    = "git::https://github.com/canonical/sdcore-ausf-k8s-operator//terraform?ref=v1.5"
+  model     = data.juju_model.sdcore.name
+  channel   = var.sdcore_channel
+  revision  = var.ausf_revision
+  resources = var.ausf_resources
 }
 
 module "nms" {
-  source  = "git::https://github.com/canonical/sdcore-nms-k8s-operator//terraform?ref=v1.5"
-  model   = data.juju_model.sdcore.name
-  channel = var.sdcore_channel
+  source    = "git::https://github.com/canonical/sdcore-nms-k8s-operator//terraform?ref=v1.5"
+  model     = data.juju_model.sdcore.name
+  channel   = var.sdcore_channel
+  revision  = var.nms_revision
+  resources = var.nms_resources
 }
 
 module "nrf" {
-  source  = "git::https://github.com/canonical/sdcore-nrf-k8s-operator//terraform?ref=v1.5"
-  model   = data.juju_model.sdcore.name
-  channel = var.sdcore_channel
+  source    = "git::https://github.com/canonical/sdcore-nrf-k8s-operator//terraform?ref=v1.5"
+  model     = data.juju_model.sdcore.name
+  channel   = var.sdcore_channel
+  revision  = var.nrf_revision
+  resources = var.nrf_resources
 }
 
 module "nssf" {
-  source  = "git::https://github.com/canonical/sdcore-nssf-k8s-operator//terraform?ref=v1.5"
-  model   = data.juju_model.sdcore.name
-  channel = var.sdcore_channel
-  config  = var.nssf_config
+  source    = "git::https://github.com/canonical/sdcore-nssf-k8s-operator//terraform?ref=v1.5"
+  model     = data.juju_model.sdcore.name
+  channel   = var.sdcore_channel
+  config    = var.nssf_config
+  revision  = var.nssf_revision
+  resources = var.nssf_resources
 }
 
 module "pcf" {
-  source  = "git::https://github.com/canonical/sdcore-pcf-k8s-operator//terraform?ref=v1.5"
-  model   = data.juju_model.sdcore.name
-  channel = var.sdcore_channel
+  source    = "git::https://github.com/canonical/sdcore-pcf-k8s-operator//terraform?ref=v1.5"
+  model     = data.juju_model.sdcore.name
+  channel   = var.sdcore_channel
+  revision  = var.pcf_revision
+  resources = var.pcf_resources
 }
 
 module "smf" {
-  source  = "git::https://github.com/canonical/sdcore-smf-k8s-operator//terraform?ref=v1.5"
-  model   = data.juju_model.sdcore.name
-  channel = var.sdcore_channel
+  source    = "git::https://github.com/canonical/sdcore-smf-k8s-operator//terraform?ref=v1.5"
+  model     = data.juju_model.sdcore.name
+  channel   = var.sdcore_channel
+  revision  = var.smf_revision
+  resources = var.smf_resources
 }
 
 module "udm" {
-  source  = "git::https://github.com/canonical/sdcore-udm-k8s-operator//terraform?ref=v1.5"
-  model   = data.juju_model.sdcore.name
-  channel = var.sdcore_channel
+  source    = "git::https://github.com/canonical/sdcore-udm-k8s-operator//terraform?ref=v1.5"
+  model     = data.juju_model.sdcore.name
+  channel   = var.sdcore_channel
+  revision  = var.udm_revision
+  resources = var.udm_resources
 }
 
 module "udr" {
-  source  = "git::https://github.com/canonical/sdcore-udr-k8s-operator//terraform?ref=v1.5"
-  model   = data.juju_model.sdcore.name
-  channel = var.sdcore_channel
+  source    = "git::https://github.com/canonical/sdcore-udr-k8s-operator//terraform?ref=v1.5"
+  model     = data.juju_model.sdcore.name
+  channel   = var.sdcore_channel
+  revision  = var.udr_revision
+  resources = var.udr_resources
 }
 
 module "mongodb" {
