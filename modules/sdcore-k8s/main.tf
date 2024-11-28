@@ -42,7 +42,6 @@ module "nssf" {
   source    = "git::https://github.com/canonical/sdcore-nssf-k8s-operator//terraform"
   model     = data.juju_model.sdcore.name
   channel   = var.sdcore_channel
-  config    = var.nssf_config
   revision  = var.nssf_revision
   resources = var.nssf_resources
 }
