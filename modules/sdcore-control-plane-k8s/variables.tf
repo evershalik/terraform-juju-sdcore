@@ -90,12 +90,6 @@ variable "nrf_revision" {
   default     = null
 }
 
-variable "nssf_config" {
-  description = "Application config for the NSSF. Details about available options can be found at https://charmhub.io/sdcore-nssf-k8s-operator/configure."
-  type        = map(string)
-  default     = {}
-}
-
 variable "nssf_resources" {
   description = "Resources to use with the application. Details about available options can be found at https://charmhub.io/sdcore-nssf-k8s-operator/configure."
   type        = map(string)
