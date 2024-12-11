@@ -841,3 +841,9 @@ resource "juju_offer" "amf-fiveg-n2" {
   application_name = module.amf.app_name
   endpoint         = module.amf.provides.fiveg_n2
 }
+
+resource "juju_offer" "nms-fiveg-core-gnb" {
+  application_name = data.juju_model.sdcore.name
+  endpoint         = module.nms.app_name
+  model            = module.nms.provides.fiveg_core_gnb
+}

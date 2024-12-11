@@ -8,6 +8,11 @@ output "amf_fiveg_n2_offer_url" {
   value       = juju_offer.amf-fiveg-n2.url
 }
 
+output "nms_fiveg_core_gnb_offer_url" {
+  description = "NMS `fiveg_core_gnb` offer."
+  value       = juju_offer.nms-fiveg-core-gnb.url
+}
+
 # Outputs required to consume external offers
 
 output "nms_app_name" {
@@ -17,10 +22,6 @@ output "nms_app_name" {
 output "fiveg_n4_endpoint" {
   description = "Name of the endpoint to integrate with fiveg_n4 interface."
   value       = module.nms.requires.fiveg_n4
-}
-output "fiveg_gnb_identity_endpoint" {
-  description = "Name of the endpoint to integrate with fiveg_gnb_identity interface."
-  value       = module.nms.requires.fiveg_gnb_identity
 }
 
 output "grafana_agent_app_name" {
