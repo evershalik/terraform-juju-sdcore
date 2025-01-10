@@ -1,4 +1,4 @@
-# Copyright 2024 Canonical Ltd.
+# Copyright 2024-2025 Canonical Ltd.
 # See LICENSE file for licensing details.
 
 # Integration offers for external systems
@@ -19,9 +19,9 @@ output "nms_app_name" {
   description = "Name of the deployed NMS application."
   value       = module.nms.app_name
 }
-output "fiveg_gnb_identity_endpoint" {
-  description = "Name of the endpoint to integrate with fiveg_gnb_identity interface."
-  value       = module.nms.requires.fiveg_gnb_identity
+output "fiveg_core_gnb_endpoint" {
+  description = "Name of the endpoint to integrate with fiveg_core_gnb interface."
+  value       = module.nms.provides.fiveg_core_gnb
 }
 
 output "grafana_agent_app_name" {

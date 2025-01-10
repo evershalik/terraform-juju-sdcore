@@ -1,4 +1,4 @@
-# Copyright 2024 Canonical Ltd.
+# Copyright 2024-2025 Canonical Ltd.
 # See LICENSE file for licensing details.
 
 variable "model" {
@@ -64,6 +64,12 @@ variable "ausf_revision" {
   description = "Revision number of the AUSF charm"
   type        = number
   default     = null
+}
+
+variable "nms_channel" {
+  description = "The channel to use when deploying the NMS charm."
+  type        = string
+  default     = "1.5/stable"
 }
 
 variable "nms_resources" {

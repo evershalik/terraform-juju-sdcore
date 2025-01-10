@@ -1,4 +1,4 @@
-# Copyright 2024 Canonical Ltd.
+# Copyright 2024-2025 Canonical Ltd.
 # See LICENSE file for licensing details.
 
 data "juju_model" "sdcore" {
@@ -25,7 +25,7 @@ module "ausf" {
 module "nms" {
   source    = "git::https://github.com/canonical/sdcore-nms-k8s-operator//terraform?ref=v1.5"
   model     = data.juju_model.sdcore.name
-  channel   = var.sdcore_channel
+  channel   = var.nms_channel
   revision  = var.nms_revision
   resources = var.nms_resources
 }
