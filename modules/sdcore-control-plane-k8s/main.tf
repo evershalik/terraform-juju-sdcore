@@ -6,7 +6,7 @@ data "juju_model" "sdcore" {
 }
 
 module "amf" {
-  source    = "git::https://github.com/canonical/sdcore-amf-k8s-operator//terraform"
+  source    = "git::https://github.com/evershalik/sdcore-amf-k8s-operator//terraform"
   model     = data.juju_model.sdcore.name
   channel   = var.sdcore_channel
   config    = var.amf_config
@@ -15,7 +15,7 @@ module "amf" {
 }
 
 module "ausf" {
-  source    = "git::https://github.com/canonical/sdcore-ausf-k8s-operator//terraform"
+  source    = "git::https://github.com/evershalik/sdcore-ausf-k8s-operator//terraform"
   model     = data.juju_model.sdcore.name
   channel   = var.sdcore_channel
   revision  = var.ausf_revision
@@ -23,7 +23,7 @@ module "ausf" {
 }
 
 module "nms" {
-  source    = "git::https://github.com/canonical/sdcore-nms-k8s-operator//terraform"
+  source    = "git::https://github.com/evershalik/sdcore-nms-k8s-operator//terraform"
   model     = data.juju_model.sdcore.name
   channel   = var.sdcore_channel
   revision  = var.nms_revision
@@ -31,7 +31,7 @@ module "nms" {
 }
 
 module "nrf" {
-  source    = "git::https://github.com/canonical/sdcore-nrf-k8s-operator//terraform"
+  source    = "git::https://github.com/evershalik/sdcore-nrf-k8s-operator//terraform"
   model     = data.juju_model.sdcore.name
   channel   = var.sdcore_channel
   revision  = var.nrf_revision
@@ -39,7 +39,7 @@ module "nrf" {
 }
 
 module "nssf" {
-  source    = "git::https://github.com/canonical/sdcore-nssf-k8s-operator//terraform"
+  source    = "git::https://github.com/evershalik/sdcore-nssf-k8s-operator//terraform"
   model     = data.juju_model.sdcore.name
   channel   = var.sdcore_channel
   revision  = var.nssf_revision
@@ -47,7 +47,7 @@ module "nssf" {
 }
 
 module "pcf" {
-  source    = "git::https://github.com/canonical/sdcore-pcf-k8s-operator//terraform"
+  source    = "git::https://github.com/evershalik/sdcore-pcf-k8s-operator//terraform"
   model     = data.juju_model.sdcore.name
   channel   = var.sdcore_channel
   revision  = var.pcf_revision
@@ -55,7 +55,7 @@ module "pcf" {
 }
 
 module "smf" {
-  source    = "git::https://github.com/canonical/sdcore-smf-k8s-operator//terraform"
+  source    = "git::https://github.com/evershalik/sdcore-smf-k8s-operator//terraform"
   model     = data.juju_model.sdcore.name
   channel   = var.sdcore_channel
   revision  = var.smf_revision
@@ -63,7 +63,7 @@ module "smf" {
 }
 
 module "udm" {
-  source    = "git::https://github.com/canonical/sdcore-udm-k8s-operator//terraform"
+  source    = "git::https://github.com/evershalik/sdcore-udm-k8s-operator//terraform"
   model     = data.juju_model.sdcore.name
   channel   = var.sdcore_channel
   revision  = var.udm_revision
@@ -71,7 +71,7 @@ module "udm" {
 }
 
 module "udr" {
-  source    = "git::https://github.com/canonical/sdcore-udr-k8s-operator//terraform"
+  source    = "git::https://github.com/evershalik/sdcore-udr-k8s-operator//terraform"
   model     = data.juju_model.sdcore.name
   channel   = var.sdcore_channel
   revision  = var.udr_revision
@@ -93,7 +93,7 @@ module "grafana-agent" {
 }
 
 module "self-signed-certificates" {
-  source     = "git::https://github.com/canonical/self-signed-certificates-operator//terraform"
+  source     = "git::https://github.com/evershalik/self-signed-certificates-operator//terraform"
   model_name = data.juju_model.sdcore.name
   channel    = var.self_signed_certificates_channel
   config     = var.self_signed_certificates_config
